@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Siddhi ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e84393;
+            --primary-light: #fd79a8;
+            --gold: #e17055;
+            --text-dark: #2d3436;
+            --glass: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.9);
+            --correct: #00b894;
+            --wrong: #d63031;
+        }
+
+        * { 
+            margin: 0; padding: 0; 
+            box-sizing: border-box; 
+            cursor: none;  
+        }
+
+        body {
+            background: url('https://shubhamsanap1092-dot.github.io/love-story/IMG-20260131-WA0023.jpg') no-repeat center center/cover;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Nunito', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 0;
+        }
+
+        .cursor-dot, .cursor-outline {
+            position: fixed; 
+            top: 0; left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%; 
+            z-index: 9999; 
+            pointer-events: none;
+        }
+        .cursor-dot { 
+            width: 8px; 
+            height: 8px; 
+            background: var(--primary); }
+        .cursor-outline {
+            width: 40px; 
+            height: 40px;
+            border: 2px solid var(--primary-light);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+        body.hovering .cursor-outline {
+            width: 60px; 
+            height: 60px;
+            background: rgba(232, 67, 147, 0.1);
+            border-color: var(--primary);
+        }
+
+        .music-btn {
+            position: fixed; 
+            top: 20px; 
+            right: 20px; 
+            z-index: 100;
+            background: var(--glass); 
+            padding: 10px 20px;
+            border-radius: 50px; 
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            font-size: 1rem; 
+            user-select: none;
+            transition: all 0.3s ease; 
+            font-weight: bold; 
+            color: var(--primary);
+            display: flex; 
+            align-items: center; 
+            gap: 8px;
+        }
+
+        .music-btn.playing { 
+            background: var(--primary); 
+            color: white; 
+            animation: pulse-border 2s infinite; }
+
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 0 0 rgba(232, 67, 147, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(232, 67, 147, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(232, 67, 147, 0); }
+        }
+
+        .container {
+            background: var(--glass);
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+            padding: 40px 30px; 
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            border: 1px solid var(--glass-border);
+            text-align: center; 
+            max-width: 500px; 
+            width: 90%;
+            max-height: 85vh; 
+            overflow-y: auto;
+            position: relative; 
+            z-index: 10;
+            transition: all 0.5s ease;
+        }
+
+        .container::-webkit-scrollbar { width: 0; }
+
+        .progress-container {
+            position: absolute; 
+            top: 0; left: 0; 
+            width: 100%; 
+            height: 5px;
+            background: rgba(255,255,255,0.3); 
+            border-radius: 30px 30px 0 0; 
+            overflow: hidden;
+        }
+
+        .progress-bar { 
+            height: 100%; 
+            background: var(--primary); 
+            width: 0%; 
+            transition: width 0.5s ease; 
+        }
+
+        h1 {
+            color: var(--primary); 
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5em; 
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1); 
+            line-height: 1.1;
+        }
+
+        .typing-text {
+            color: var(--text-dark); 
+            -size: 1.15em; 
+            margin-bottom: 25px;
+            line-height: 1.6; 
+            font-weight: 700; 
+            min-height: 60px;
+        }
+
+        .gif-container {
+            margin-bottom: 20px; 
+            height: 160px;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+        }
+
+        .gif-container img {
+            max-height: 100%; 
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
+            transition: transform 0.3s ease;
+        }
+
+        .gif-container img:hover { 
+            transform: scale(1.05); 
+        }
+
+        button {
+            background: linear-gradient(45deg, var(--primary), var(--primary-light));
+            color: white; 
+            border: none; 
+            padding: 15px 35px;
+            border-radius: 50px; 
+            font-size: 1.1em; 
+            cursor: pointer;
+            transition: all 0.4s ease; 
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800; 
+            box-shadow: 0 8px 20px rgba(232, 67, 147, 0.4);
+            margin: 8px; 
+            letter-spacing: 0.5px;
+        }
+
+        button:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 12px 30px rgba(232, 67, 147, 0.6); 
+        }
+
+        .btn-secondary {
+            background: white; 
+            color: var(--text-dark);
+            border: 2px solid var(--text-dark); 
+            padding: 10px 20px;
+            font-size: 0.9em; 
+            margin-top: 5px; 
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover { 
+            background: var(--text-dark); 
+            color: white; 
+            transform: none; 
+        }
+
+        .step { 
+            display: none; 
+            opacity: 0; 
+            transform: translateY(20px); 
+            transition: all 0.6s ease; 
+        }
+
+        .step.active { 
+            display: block; 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+
+        .photo-stack { 
+            position: relative; 
+            height: 220px; 
+            margin: 30px auto; 
+            width: 220px; }
+        .photo {
+            position: absolute; 
+            width: 200px; 
+            height: 220px;
+            background: white; 
+            padding: 10px; padding-bottom: 40px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
+            border-radius: 8px;
+            transition: all 0.5s ease; 
+            border: 1px solid rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+
+        .photo:nth-child(1) { 
+            transform: rotate(-10deg); z-index: 1; 
+        }
+        .photo:nth-child(2) { 
+            transform: rotate(10deg); z-index: 2; 
+        }
+        .photo:nth-child(3) { 
+            transform: rotate(0deg); z-index: 3; 
+        }
+        .photo:nth-child(4) { 
+            transform: rotate(5deg); z-index: 4; 
+        }
+        .photo:nth-child(5) { 
+            transform: rotate(-5deg); z-index: 5; 
+        }
+        .photo:hover { 
+            transform: scale(1.1) rotate(0deg); z-index: 10; 
+        }
+        .photo img { 
+            width: 100%; height: 100%; object-fit: cover; 
+        }
+
+        .bg-heart {
+            position: absolute; 
+            color: rgba(255, 182, 193, 0.4); 
+            font-size: 20px;
+            z-index: 0; 
+            animation: floatHeart linear infinite; 
+            top: 100vh;
+        }
+
+        @keyframes floatHeart {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+
+        .whatsapp-btn {
+            background: #25D366 !important;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4) !important;
+            width: 100%;
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 10px;
+        }
+
+        .whatsapp-btn:hover { 
+            background: #128C7E !important;
+        }
+
+        .lightbox {
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100%; 
+            height: 100%;
+            background: rgba(0,0,0,0.9); 
+            z-index: 10000;
+            display: none; 
+            justify-content: center; 
+            align-items: center;
+            opacity: 0; 
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.active { 
+            display: flex; 
+            opacity: 1; 
+        }
+
+        .lightbox img { 
+            max-width: 90%; 
+            max-height: 85vh; 
+            border-radius: 10px; 
+            box-shadow: 0 0 30px white; 
+        }
+
+        .lb-close { 
+            position: absolute; 
+            top: 20px; 
+            right: 20px; 
+            font-size: 2rem; 
+            color: white; 
+            cursor: pointer; 
+        }
+
+        #noBtn { 
+            position: absolute; 
+            background: white; 
+            color: var(--primary); 
+            border: 2px solid var(--primary); 
+            transition: 0.2s; 
+        }
+
+        .quiz-options { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+            margin: 20px 0; 
+        }
+
+        .quiz-btn {
+            background: white; 
+            border: 2px solid var(--primary-light); 
+            color: var(--text-dark);
+            padding: 15px; 
+            border-radius: 15px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: 0.3s;
+            font-size: 1rem;
+        }
+
+        .quiz-btn:hover { 
+            background: var(--primary-light); 
+            color: white; 
+        }
+
+        .quiz-btn.correct { 
+            background: var(--correct); 
+            color: white; 
+            border-color: var(--correct); 
+        }
+
+        .quiz-btn.wrong { 
+            background: var(--wrong); 
+            color: white; 
+            border-color: var(--wrong); 
+            animation: shake 0.5s; 
+        }
+        
+        @keyframes shake { 
+            0%, 100% { transform: translateX(0); } 
+            25% { transform: translateX(-10px); } 
+            75% { transform: translateX(10px); } 
+        }
+
+        .secret-container {
+            position: relative; 
+            width: 100%; 
+            height: 150px; 
+            background: #fff0f3;
+            border-radius: 15px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            overflow: hidden; 
+            cursor: pointer; 
+            border: 2px dashed var(--primary); 
+            margin: 20px 0;
+        }
+
+        .secret-blur {
+            position: absolute; 
+            top: 0; left: 0; 
+            width: 100%; 
+            height: 100%;
+            background: rgba(232, 67, 147, 0.95);
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            color: white; 
+            font-weight: bold; 
+            font-size: 1.4em; 
+            z-index: 2;
+            transition: opacity 0.5s ease;
+        }
+
+        .secret-content { 
+            z-index: 1; 
+            font-size: 1.2em; 
+            padding: 20px; 
+            color: var(--text-dark); 
+            font-weight: bold; 
+        }
+
+        .promise-container {
+            background: white; 
+            padding: 15px; 
+            border-radius: 15px; 
+            margin: 20px 0;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 15px;
+            cursor: pointer; 
+            transition: transform 0.2s;
+        }
+
+        .checkbox { 
+            width: 25px; 
+            height: 25px; 
+            border: 2px solid var(--primary); 
+            border-radius: 50%; display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+
+        .promise-container.checked .checkbox { 
+            background: var(--primary); 
+        }
+
+        .promise-container.checked .checkbox::after { 
+            content: '✓'; 
+            color: white; 
+        }
+
+        .timeline { 
+            text-align: left; 
+            margin: 20px 0; 
+            border-left: 3px solid var(--primary-light); 
+            padding-left: 20px; 
+        }
+
+        .timeline-item { 
+            margin-bottom: 20px; 
+            position: relative; 
+        }
+
+        .timeline-item::before { 
+            content: ''; 
+            position: absolute; 
+            left: -29px; 
+            top: 5px; 
+            width: 14px; 
+            height: 14px; 
+            background: var(--primary); 
+            border-radius: 50%; 
+            border: 3px solid white; 
+        }
+
+        .t-date { 
+            color: var(--primary); 
+            font-weight: bold; 
+            font-size: 0.9em; 
+        }
+
+        .t-content { 
+            background: rgba(255,255,255,0.9); 
+            padding: 10px; 
+            border-radius: 8px; 
+            margin-top: 5px; 
+            font-size: 0.95em; 
+        }
+
+        .bucket-list { 
+            text-align: left; 
+            margin: 20px 0; 
+        }
+
+        .bucket-item {
+            background: rgba(255,255,255,0.9); 
+            padding: 12px; 
+            margin-bottom: 8px; 
+            border-radius: 8px;
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            cursor: pointer; 
+            border: 1px solid transparent; 
+            transition: 0.3s;
+        }
+
+        .bucket-item:hover { 
+            transform: translateX(5px); 
+            border-color: var(--primary); 
+        }
+
+        .bucket-item.checked { 
+            background: #e3ffe8; 
+            opacity: 0.8; 
+        }
+
+        .bucket-item.checked span { 
+            text-decoration: line-through; 
+            color: #888; 
+        }
+
+        .reasons-list li, .future-list li {
+            text-align: left; 
+            background: rgba(255,255,255,0.9); 
+            margin: 10px 0; 
+            padding: 15px; 
+            border-radius: 12px;
+            list-style: none; 
+            display: flex; 
+            align-items: center; 
+            transform: translateX(-20px); 
+            opacity: 0; 
+            transition: 0.5s ease;
+        }
+
+        .reasons-list li.show, .future-list li.show { 
+            transform: translateX(0); 
+            opacity: 1; 
+        }
+        
+        .letter-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 10px; 
+            margin: 20px 0; 
+        }
+
+        .letter-btn { 
+            background: rgba(255,255,255,0.95); 
+            border: 2px solid var(--primary-light); 
+            padding: 12px; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            font-weight: bold; 
+            color: var(--text-dark); 
+        }
+
+        .letter-popup { 
+            display: none; 
+            background: #fff0f5; 
+            padding: 15px; 
+            border-radius: 10px; 
+            margin-top: 15px; 
+            border-left: 4px solid var(--primary); 
+            text-align: left; 
+        }
+        
+        .final-msg { 
+            font-size: 1.1em; 
+            color: #444; 
+            font-weight: 600; 
+            line-height: 1.6; 
+            margin-bottom: 30px; 
+        }
+
+        .signature { 
+            font-family: 'Great Vibes', cursive; 
+            color: var(--primary); 
+            font-size: 2.5em; 
+            margin-bottom: 30px; 
+        }
+
+        input[type="date"] { 
+            padding: 15px; 
+            border: 2px solid var(--primary-light); 
+            border-radius: 15px; 
+            width: 100%; 
+            outline: none; 
+            margin-top: 10px; 
+            font-size: 1.1em; 
+            color: var(--primary); 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    <audio id="bgMusic" loop preload="auto">
+        
+        <source src="https://shubhamsanap1092-dot.github.io/RADHAKRISHNA/Tum%20Prem%20Ho%20%E2%9D%A4%20(Love%20Mashup)%20Marathi%20X%20English%20X%20Hindi%20I%20Beatzhacker%20I%20Arijit%20Singh%2CEd%20Sheeran%2CMohit%2B%20-%20Beatzhacker%20Music.mp3" type="audio/mp3">
+    </audio>
+
+    <div class="music-btn" onclick="toggleMusic()">
+        <i class="fas fa-music"></i>
+         <span>Play Music</span>
+        </div>
+    <div id="hearts-bg-container"></div>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lb-close">&times;</span>
+        <img id="lightbox-img" src="" alt="Full View">
+    </div>
+
+    <div class="container">
+        <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+
+        <div class="step active" id="step1">
+            <div class="gif-container"><img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5YnZ3eHh6cW55YnZ3eHh6cW55YnZ3eHh6cW55/26FLdmIp6wJr91JAI/giphy.gif" alt="Hi"></div>
+            <h1>Siddhi...</h1>
+            <p class="typing-text" data-text="Ek baat kehni thi tumse... sunogi?"></p>
+            <button id="startBtn" onclick="nextStep(2)"
+            >Haan bolo... ❤️</button>
+        </div>
+
+        <div class="step" id="step2">
+            <div class="gif-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLlFHZ_YiF18m8dckHqWMRTxTcqi7qoa6p1w&s" alt="Thinking"></div>
+            <h1>The Wait...</h1>
+            <p class="typing-text" data-text="Tumhe pata hai? Pichle 3 saal (1,095 days) maine sirf tumhara intezaar kiya hai."></p>
+            <button onclick="nextStep(3)">View Our Story 📅</button>
+            <br><button class="btn-secondary" onclick="prevStep(1)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step3">
+            <h1>Our Journey</h1>
+            <div class="timeline">
+                <div class="timeline-item"><div class="t-date">8 Aug 2022</div>
+                <div class="t-content">First time I saw you at VCC Office. "Yaar ye kitni cute hai!" 😍</div></div>
+                <div class="timeline-item"><div class="t-date">Nov 2022</div>
+                <div class="t-content">You started attending lectures regularly. The "Pencil Scene" happened! ✏️</div></div>
+                <div class="timeline-item"><div class="t-date">The Hard Times</div>
+                <div class="t-content">Blocked but never stopped caring. I sent you study notes hoping they'd help. 📚</div></div>
+                <div class="timeline-item"><div class="t-date">Today</div>
+                <div class="t-content">You are back. And I'm the happiest man alive. ❤️</div></div>
+            </div>
+            <button onclick="nextStep(4)">See Memories 📸</button>
+            <br><button class="btn-secondary" onclick="prevStep(2)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step4">
+            <h1>Memories (Tap to View)</h1>
+            <div class="photo-stack">
+                <div class="photo" onclick="openLightbox(this)">
+                    <img src="https://shubhamsanap1092-dot.github.io/love-story/1768613788871.jpg" alt="Memory"></div>
+                <div class="photo" onclick="openLightbox(this)">
+                    <img src="https://shubhamsanap1092-dot.github.io/love-story/IMG-20250622-WA0000~3.jpg" alt="Memory"></div>
+                <div class="photo" onclick="openLightbox(this)">
+                    <img src="https://shubhamsanap1092-dot.github.io/love-story/IMG-20251030-WA0003.jpg" alt="Memory"></div>
+                <div class="photo" onclick="openLightbox(this)">
+                    <img src="https://shubhamsanap1092-dot.github.io/love-story/IMG-20260131-WA0023.jpg" alt="Memory"></div>
+                <div class="photo" onclick="openLightbox(this)">
+                    <img src="https://shubhamsanap1092-dot.github.io/love-story/instasquare.photoeditor.effect.cutout_2025103024229938.png" alt="Memory"></div>
+            </div>
+            <p style="margin-top: 20px;">Jab tum door thi, toh bas inn purani yaadon ke sahare jiya hoon main.</p>
+            <button onclick="nextStep(5)">I felt it too...❤️</button>
+            <br><button class="btn-secondary" onclick="prevStep(3)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step5">
+            <div class="gif-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7GF-OIzZmrKkg7Dy2RsVGVt5sOZrt4-BfiQ&s" alt="Promise"></div>
+            <h1>Ek Promise chahiye ?</h1>
+            <p>Siddhi, ab bas ek promise chahiye... ki tum ab mujhe kabhi akela nahi chodogi?</p>
+            <div class="promise-container" onclick="togglePromise()">
+                <div class="checkbox"></div><span> yes i promise Humesha saath rahungi, Pakka! 🤞</span>
+            </div>
+            <button id="promiseBtn" onclick="nextStep(6)" style="opacity: 0.5; pointer-events: none;">Promise Locked 🔒</button>
+            <br><button class="btn-secondary" onclick="prevStep(4)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step6">
+            <h1>Our Bucket List 📝</h1>
+            <div class="bucket-list">
+                <div class="bucket-item" onclick="this.classList.toggle('checked')"><span>🍜</span> Eat Late Night Maggi together</div>
+                <div class="bucket-item" onclick="this.classList.toggle('checked')"><span>🚗</span> Long Drive in Rain</div>
+                <div class="bucket-item" onclick="this.classList.toggle('checked')"><span>🏔️</span> Trip to Manali/Kedarnath</div>
+                <div class="bucket-item" onclick="this.classList.toggle('checked')"><span>🏠</span> Build our Dream House</div>
+                <div class="bucket-item" onclick="this.classList.toggle('checked')"><span>🩺</span> You in White Coat, Me in Hoodie</div>
+            </div>
+            <button onclick="nextStep(7)">Dil Ki Baat... 💖</button>
+            <br><button class="btn-secondary" onclick="prevStep(5)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step7">
+            <div class="gif-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSH8-_mI-cjZDCRYhfraRD7-pBE6OLDPaTUHQ&s" alt="Flower"></div>
+            <h1>Dil ki baat bolu...</h1>
+            <p class="typing-text" data-text="Auntie ke number pe message kiya tha, 
+            block ho gaya... vo baat dil pe lagi thi. Par tumhare parents ki bhi utni hi respect karta hoon jitni apne parents ki. 
+            You are a diamond! Will you be mine?"></p>
+            <div style="margin-top: 30px; height: 60px; position: relative; display: flex; justify-content: center; gap: 20px;">
+                <button onclick="handleYes()">Yes, I'm Yours! 💖</button>
+                <button id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()">No 💔</button>
+            </div>
+            <button class="btn-secondary" onclick="prevStep(6)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step8">
+            <div class="gif-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRByTdvwrgoNwrlaFIfh8KrKbX5Pmj8scjVcA&s" alt="Hug"></div>
+            <h1>Finally! 😭❤️</h1>
+            <p>You made me the happiest person alive. Here is a small gift for your moods.</p>
+            <div class="letter-grid">
+                <button class="letter-btn" onclick="showLetter('sad')">😢 Sad</button>
+                <button class="letter-btn" onclick="showLetter('happy')">😄 Happy</button>
+                <button class="letter-btn" onclick="showLetter('miss')">🥺 Missing Me</button>
+                <button class="letter-btn" onclick="showLetter('angry')">😠 Angry</button>
+            </div>
+            <div id="letter-content" class="letter-popup"></div>
+            <button onclick="nextStep(9)" style="margin-top:15px;">Date Fix Karein? 📅</button>
+            <br><button class="btn-secondary" onclick="prevStep(7)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step9">
+            <h1>Chalo Date Fix Karte Hai!</h1>
+            <input type="date" id="dateInput">
+            <br><br>
+            <button onclick="nextStep(10)">Date Locked! 📅</button>
+            <br><button class="btn-secondary" onclick="prevStep(8)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step10">
+            <h1>Why only You?</h1>
+            <ul class="reasons-list" id="reasonList">
+                <li><span>🌍</span> Duniya mein hazaron log hain, par mujhe sirf tum chahiye.</li>
+                <li><span>🥺</span> Tumhare gusse mein bhi mujhe pyaar dikhta hai.</li>
+                <li><span>🩹</span> You healed the heart you didn't break.</li>
+                <li><span>🗣️</span> Tumhari awaaz sunkar hi mera din banta hai.</li>
+                <li><span>🤝</span> Waada raha, ab kabhi tumhe khud se door nahi hone dunga.</li>
+                <li><span>🌙</span> You are the moon in my darkest nights.</li>
+                <li><span>🦋</span> Tumhe dekh kar aaj bhi mujhe butterflies aati hain.</li>
+                <li><span>🌧️</span> Barish mein tumhara haath pakad kar chalna hai.</li>
+                <li><span>📖</span> Hamari love story meri favorite kahani hai.</li>
+                <li><span>🧿</span> Bas tumhe meri umar lag jaye.</li>
+                <li><span>👀</span> Jab tum mujhe dekhti ho, I feel invincible.</li>
+                <li><span>🎨</span> Tumne meri black & white zindagi mein rang bhar diye.</li>
+                <li><span>⚓</span> Tum hi meri shuruwat ho, aur tum hi mera ant.</li>
+                <li><span>🍫</span> You are sweeter than the chocolate we share.</li>
+                <li><span>🛡️</span> I will protect your heart with my life.</li>
+                <li><span>🛌</span> Raat ka aakhri khayal aur subah ki pehli soch tum ho.</li>
+                <li><span>🦁</span> Tumhare liye main duniya se lad sakta hu.</li>
+                <li><span>👣</span> I want to walk every step of life with you.</li>
+                <li><span>🔒</span> Mera dil sirf tumhare liye reserved hai, forever.</li>
+                <li><span>🙏</span> Rab se maangi hui meri sabse pyaari dua ho tum.</li>
+                <li><span>🦚</span> Jaise Radha ke bina Krishna adhure hain, waise main tumhare bina.</li>
+                <li><span>🙏</span> Humara milna koi ittefaq nahi, Kanha ji ka ashirwad hai.</li>
+                <li><span>🕯️</span> Har mandir, har aarti mein bas tumhe hi maanga hai maine.</li>
+                <li><span>🎻</span> 3 saal ka intezaar Kanha ji ki pariksha thi, jo hum jeet gaye.</li>
+                <li><span>🕉️</span> Humare rishte ki dor ab Kanha ji ke haath mein hai.</li>
+                <li><span>🌺</span> Tumhare aane se meri sooni duniya Vrindavan ban gayi hai.</li>
+                <li><span>✨</span> Tum meri Radha ho, aur main tumhara humesha ka pagal.</li>
+                <li><span>🧿</span> Kanha ji hamare pyaar ko har nazar se bachaye rakhein.</li>
+                <li><span>💫</span> Hamari kismat shayad fursat mein khud Kanha ne likhi hai.</li>
+                <li><span>🧘</span> Tumhe paana mere liye moksh se kam nahi hai.</li>
+                <li><span>🛐</span> Maine tumhe chuna nahi, Kanha ne tumhe mere liye bheja hai.</li>
+                <li><span>🎶</span> Meri har dhadkan mein ab tumhara naam hai.</li>
+            </ul>
+            </ul>
+            <br>
+            <button onclick="nextStep(11)">One More Message 💌</button>
+            <br><button class="btn-secondary" onclick="prevStep(9)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step11">
+            <div class="gif-container"><img src="https://res.cloudinary.com/dtj7ghsyt/image/upload/v1768253777/jqo2zt79knfcgu3mjjlx.png" alt="First Sight"></div>
+            <h1>Woh Pehli Baar...</h1>
+            <p class="typing-text" data-text="Mene Tumhe Pehli Bar Vcc ke Office Dekha Tha. I perfectly remember that day, it was 8 August 2022. I was preparing for JEE, and after watching you the first time I convinced my parents to change the batch from JEE to NEET just to see you every day."></p>
+            <button onclick="nextStep(12)">Future Plans? 🏠</button>
+            <br><button class="btn-secondary" onclick="prevStep(10)">⬅️ Go Back</button>
+        </div>
+            
+        <div class="step" id="step12">
+            <h1>Sapne... 💭</h1>
+            <ul class="future-list">
+               <li><span>🍜</span> Late night Maggi & Movies.</li>
+                <li><span>🚗</span> Long drives pe tera haath pakadna.</li>
+                <li><span>☕</span> Tere haath ki subah wali chai.</li>
+                <li><span>👵</span> Growing old together.</li>
+                <li><span>🏔️</span> Exploring the world with you.</li>
+                <li><span>🏠</span> Building our dream home.</li>
+                <li><span>🩺💻</span>Tera Stethoscope aur mera Laptop. </li>
+                <li><span>⌨️😤</span>Meri coding errors aur tera mood swings handle karna. </li>
+                <li><span>🌐🏥</span>Tere clinic ki website design karna. </li>
+                <li><span>🥼🧥</span> Tera White Coat aur meri Hoodie.</li>
+                <li><span>🕰️🌙</span> Raat bhar teri Night Shift ka wait karna.</li>
+                <li><span>🧠❤️</span>Engineering logic aur Doctor wala care. </li>
+                <li><span>📶💓</span> Sunday ko tera BP check karna, mera WiFi fix karna.</li>
+                <li><span>📜🧐</span>Teri messy handwriting ko decode karna </li>
+                <li><span>💊🐞</span>Mere bugs fix karna, tere patients cure karna. </li>
+                <li><span>➗🤝</span>Life ki complex equations saath solve karna </li>
+                <li><span>📚💻</span> Tera anatomy ratna, mera algorithm likhna.</li>
+                <li><span>🔌💉</span> Mere circuits aur teri surgeries. </li>
+                <li><span>🧬⚛️</span>Tujhe biology samjhana, mujhe physics ratna. </li>
+                <li><span>☕📈</span> Coffee dates pe ECG aur PCBs discuss karna.</li>
+                <li><span>🧠✨</span> Mera 'Logic', tera 'Magic'. </li>
+                <li><span>🛠️✂️</span> Tera surgical precision, meri engineering jugaad. </li>
+                <li><span>🧪💪</span> Humari Chemistry, Physics se bhi strong. </li>
+                <li><span>🏥🖥️</span> Tera ICU duty, meri server duty. </li>
+                <li><span>🌏💓</span> Mere 'Hello World' se tera 'Heartbeat' tak. </li>
+                <li><span>🎓💍</span>Doctor ki degree, Engineering ki Mrs. </li>
+                <li><span>▶️💓</span>Mere codes run karna, teri pulse check karna. </li>
+            </ul>
+            <br>
+            <button onclick="nextStep(13)">Let's Play a Quiz! 🧠</button>
+            <br><button class="btn-secondary" onclick="prevStep(11)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step13">
+            <h1>❤️ Love Quiz ❤️</h1>
+            <p id="quizQuestion">Hum pehli baar kahan mile the?</p>
+            
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="checkAnswer(this, false)">Coffee Shop</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, true)">VCC Office</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false)">Park</button>
+            </div>
+            
+            <p id="quizFeedback" style="min-height:30px; font-weight:bold; margin-top:15px;"></p>
+            
+            <button id="nextQuizBtn" style="display:none; margin-top:15px;" onclick="nextQuiz()">Next Question ➡️</button>
+            <br><button class="btn-secondary" onclick="prevStep(12)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step14">
+            <h1>A Secret Message 🤫</h1>
+            <p>Tap below to reveal what's hidden in my heart...</p>
+            
+            <div class="secret-container" onclick="revealSecret(this)">
+                <div class="secret-blur">Tap to Reveal</div>
+                <div class="secret-content">Tum meri Radha ho, aur main tumhara humesha ka pagal. ❤️</div>
+            </div>
+
+            <button onclick="nextStep(15)">Final Surprise 🎁</button>
+            <br><button class="btn-secondary" onclick="prevStep(13)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step15">
+            <div class="gif-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGcG0TyV4HmayeHRN0j-ExELYmwafPyOfSSA&s" style="border-radius:50%;"></div>
+            <h1>Kya Mere Dil Ka Permanant Password Banogi ? 💍</h1>
+            <p class="typing-text" data-text="Ye ring ek waada hai, ki mera pyaar tumhare liye kabhi kam nahi hoga."></p>
+            <button onclick="nextStep(16)">I Accept! 💖</button>
+            <br><button class="btn-secondary" onclick="prevStep(14)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step16">
+            <div class="gif-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6-uY5t5F9hC3gO-2f6yP1y6W7s3q3m1r2xw&s"></div>
+            <div style="font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: var(--primary); margin-bottom: 10px; line-height: 1;">
+                I Love You More<br>than self... <span style="font-size: 0.8em;">❤️</span>
+            </div>
+            <p class="final-msg">Shabdon mein bayan nahi kar sakta ki tum mere liye kya ho. Bas itna jaan lo,
+                 jab tak saansein hain, tab tak tumhara saath chahiye. I Love You Siddhi! Infinite times!</p>
+            <div class="signature">Yours Forever,<br>Shubham</div>
+            
+            <div style="margin-top: 30px;">
+                <button class="whatsapp-btn" onclick="sendWhatsApp()">
+                    <i class="fab fa-whatsapp"></i> I Love You Too! 💋
+                </button>
+                <br>
+                <button class="btn-secondary" onclick="prevStep(15)">⬅️ Go Back</button>
+                <button class="btn-secondary" onclick="location.reload()">🔄 Restart Journey</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        var audio = document.getElementById("bgMusic");
+        var musicStarted = false;
+        var phoneNumber = "919022365118"; 
+        
+        // --- QUIZ DATA ---
+        var quizStep = 0;
+        const quizData = [
+            { q: "Hum pehli baar kahan mile the?", options: ["Coffee Shop", "VCC Office", "Park"], correct: 1 },
+            { q: "Meri favorite late night snack kya hai?", options: ["Pizza", "Maggi", "Burger"], correct: 1 },
+            { q: "Sabse zyada pyaar kaun karta hai?", options: ["Siddhi","Shubham","Dono Barabar" ], correct: 1 }
+        ];
+
+        // --- Custom Cursor ---
+        const cursorDot = document.querySelector('[data-cursor-dot]');
+        const cursorOutline = document.querySelector('[data-cursor-outline]');
+        window.addEventListener("mousemove", (e) => {
+            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
+        });
+        document.querySelectorAll('button, .photo, .checkbox').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+        });
+
+        // --- Quiz Functions ---
+        function checkAnswer(btn, isCorrect) {
+            const feedback = document.getElementById('quizFeedback');
+            const nextBtn = document.getElementById('nextQuizBtn');
+            const allBtns = document.querySelectorAll('.quiz-btn');
+            
+            allBtns.forEach(b => b.style.pointerEvents = 'none'); 
+            if(isCorrect) {
+                btn.classList.add('correct');
+                feedback.innerHTML = "Sahi Jawab! 😍 You know me so well!";
+                feedback.style.color = "var(--correct)";
+                createConfetti();
+            } else {
+                btn.classList.add('wrong');
+                feedback.innerHTML = "Galat! 🥺 Koi baat nahi...";
+                feedback.style.color = "var(--wrong)";
+            }
+            
+            setTimeout(() => {
+                if(quizStep < quizData.length - 1) {
+                    nextBtn.innerHTML = "Next Question ➡️";
+                } else {
+                    nextBtn.innerHTML = "See Secret Message 🤫";
+                }
+                nextBtn.style.display = "inline-block";
+            }, 500);
+        }
+
+        function nextQuiz() {
+            quizStep++;
+            if(quizStep < quizData.length) {
+                document.getElementById('quizQuestion').innerText = quizData[quizStep].q;
+                const btns = document.querySelectorAll('.quiz-btn');
+                const options = quizData[quizStep].options;
+                btns.forEach((btn, index) => {
+                    btn.innerText = options[index];
+                    btn.className = 'quiz-btn';
+                    btn.style.pointerEvents = 'all';
+                    const isCorrect = (index === quizData[quizStep].correct);
+                    btn.onclick = function() { checkAnswer(this, isCorrect) };
+                });
+                document.getElementById('quizFeedback').innerHTML = "";
+                document.getElementById('nextQuizBtn').style.display = "none";
+            } else {
+                nextStep(14); 
+            }
+        }
+
+        function revealSecret(el) {
+            el.querySelector('.secret-blur').style.opacity = '0';
+            createConfetti();
+        }
+
+        // --- WhatsApp Logic ---
+        function sendWhatsApp() {
+            const msg = "I Love You Too Shubham! ❤️ Forever Yours!";
+            window.open(`https://wa.me/91${phoneNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        // --- Background Floating Hearts ---
+        function createFloatingHearts() {
+            const container = document.getElementById('hearts-bg-container');
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('bg-heart');
+                heart.innerHTML = Math.random() > 0.5 ? '❤️' : '💖';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+                heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+                container.appendChild(heart);
+                setTimeout(() => heart.remove(), 7000);
+            }, 800);
+        }
+
+        // --- Music Control ---
+        function startMusicFlow() {
+            if (!musicStarted) {
+                audio.play().then(() => {
+                    musicStarted = true;
+                    document.querySelector('.music-btn').classList.add('playing');
+                    document.querySelector('.music-btn').innerHTML = '<i class="fas fa-pause"></i> <span>Pause</span>';
+                }).catch(error => { console.log("Autoplay prevented."); });
+            }
+        }
+
+        function toggleMusic() {
+            const btn = document.querySelector('.music-btn');
+            if (audio.paused) {
+                audio.play(); btn.classList.add('playing'); btn.innerHTML = '<i class="fas fa-pause"></i> <span>Pause</span>'; musicStarted = true;
+            } else {
+                audio.pause(); btn.classList.remove('playing'); btn.innerHTML = '<i class="fas fa-music"></i> <span>Play</span>';
+            }
+        }
+
+        // --- Core Navigation ---
+        function updateProgress(stepNumber) {
+            const totalSteps = 16;
+            const progress = (stepNumber / totalSteps) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        }
+
+        function nextStep(stepNumber) {
+            if(stepNumber === 2 && !musicStarted) startMusicFlow();
+            const currentStep = document.querySelector('.step.active');
+            const nextStep = document.getElementById('step' + stepNumber);
+            currentStep.classList.remove('active');
+            setTimeout(() => {
+                nextStep.classList.add('active');
+                updateProgress(stepNumber);
+                const typingEl = nextStep.querySelector('.typing-text');
+                if (typingEl) typeWriter(typingEl, typingEl.getAttribute('data-text'));
+                if (stepNumber === 10 || stepNumber === 12) animateList();
+            }, 500);
+        }
+
+        function prevStep(stepNumber) {
+            const currentStep = document.querySelector('.step.active');
+            const prevStep = document.getElementById('step' + stepNumber);
+            currentStep.classList.remove('active');
+            setTimeout(() => { prevStep.classList.add('active'); updateProgress(stepNumber); }, 500);
+        }
+
+        function typeWriter(element, text, speed = 50) {
+            element.innerHTML = ""; let i = 0;
+            function type() {
+                if (i < text.length) { element.innerHTML += text.charAt(i); i++; setTimeout(type, speed); }
+            }
+            type();
+        }
+
+        // --- Smart No Button ---
+        function moveButton() {
+            const btn = document.getElementById('noBtn');
+            const container = document.querySelector('.container');
+            const x = Math.random() * (container.offsetWidth - 100);
+            const y = Math.random() * (container.offsetHeight - 100);
+            const texts = ["Soch lo!", "Pakka?", "Dil todogi?", "Maann jao!", "Please!", "No way!"];
+            btn.innerText = texts[Math.floor(Math.random() * texts.length)];
+            btn.style.position = 'absolute';
+            btn.style.left = `${x}px`; btn.style.top = `${y}px`;
+        }
+
+        // --- Features ---
+        let promised = false;
+        function togglePromise() {
+            const box = document.querySelector('.promise-container');
+            const btn = document.getElementById('promiseBtn');
+            promised = !promised;
+            if (promised) {
+                box.classList.add('checked'); btn.style.opacity = '1'; btn.style.pointerEvents = 'all'; createConfetti();
+            } else {
+                box.classList.remove('checked'); btn.style.opacity = '0.5'; btn.style.pointerEvents = 'none';
+            }
+        }
+
+        function handleYes() { createConfetti(); nextStep(8); }
+
+        function showLetter(mood) {
+            const box = document.getElementById('letter-content');
+            box.style.display = 'block';
+            let msg = "";
+            if(mood === 'sad') msg = "Baby, don't be sad. Remember I am always with you. Call me right now! ❤️";
+            if(mood === 'happy') msg = "Your smile is my favorite thing in the world. Keep smiling! ✨";
+            if(mood === 'miss') msg = "I miss you too! Close your eyes, take a deep breath, I'm right there. 🏡";
+            if(mood === 'angry') msg = "Okay sorry! Gussa thook do. Main kan pakadta hu. 🥺";
+            box.innerHTML = `<p>${msg}</p>`;
+        }
+
+        function animateList() {
+            const items = document.querySelectorAll('li');
+            items.forEach((item, index) => { setTimeout(() => { item.classList.add('show'); }, index * 100); });
+        }
+
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                const c = document.createElement('div');
+                c.style.position = 'fixed'; c.style.left = Math.random() * 100 + 'vw'; c.style.top = '-10px';
+                c.style.width = '10px'; c.style.height = '10px';
+                c.style.backgroundColor = ['#ff7675', '#fd79a8', '#e84393'][Math.floor(Math.random() * 3)];
+                c.style.zIndex = '1000'; c.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+                document.body.appendChild(c); setTimeout(() => c.remove(), 5000);
+            }
+        }
+
+        function openLightbox(el) {
+            document.getElementById('lightbox-img').src = el.querySelector('img').src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); }
+
+        window.onload = () => {
+            createFloatingHearts();
+            const firstText = document.querySelector('#step1 .typing-text');
+            typeWriter(firstText, firstText.getAttribute('data-text'));
+            updateProgress(1);
+            document.body.addEventListener('click', () => { if(!musicStarted) startMusicFlow(); }, { once: true });
+        };
+    </script>
+</body>
+</html>
