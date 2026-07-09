@@ -1,0 +1,2124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Divya ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+        --primary: #e88c7d;
+        --primary-light: #f7c5a3;
+        --primary-dark: #b5495a;
+        --gold: #d4af7a;
+        --text-main: #fff7ef;
+        --text-muted: #d9cdc4;
+        --glass-bg: rgba(28, 18, 24, 0.65);
+        --glass-border: rgba(247, 197, 163, 0.25);
+        --glass-card: rgba(255, 247, 239, 0.08);
+        --glass-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.8), 0 0 30px rgba(232, 140, 125, 0.15);
+        --correct: #7fd9a8;
+        --wrong: #ef8a8a;
+        --radius: 30px;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    *::selection {
+        background: var(--primary);
+        color: #1c1218;
+    }
+
+    body {
+        background: url('https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?q=80&w=2000&auto=format&fit=crop') no-repeat center center/cover;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Montserrat', sans-serif;
+        overflow: hidden;
+        position: relative;
+        color: var(--text-main);
+    }
+
+    body::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(ellipse 80% 50% at 20% 15%, rgba(232,140,125,0.3) 0%, transparent 60%),
+                    radial-gradient(ellipse 70% 45% at 85% 85%, rgba(212,175,122,0.25) 0%, transparent 60%),
+                    linear-gradient(150deg, rgba(15,8,12,0.9) 0%, rgba(35,18,24,0.8) 55%, rgba(10,6,10,0.95) 100%);
+        backdrop-filter: blur(12px);
+        z-index: 0;
+    }
+
+    .noise-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.06"/%3E%3C/svg%3E');
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .cursor-dot,
+    .cursor-outline {
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        z-index: 9999;
+        pointer-events: none;
+    }
+
+    .cursor-dot {
+        width: 6px;
+        height: 6px;
+        background: var(--primary-light);
+        box-shadow: 0 0 12px var(--primary-light);
+    }
+
+    .cursor-outline {
+        width: 40px;
+        height: 40px;
+        border: 1.5px solid rgba(247, 197, 163, 0.7);
+        transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
+    }
+
+    body.hovering .cursor-outline {
+        width: 60px;
+        height: 60px;
+        background: rgba(232, 140, 125, 0.15);
+        border-color: var(--primary);
+        box-shadow: 0 0 25px rgba(232, 140, 125, 0.4);
+    }
+/* =========================================
+       ✨ LUXURY MUSIC PLAYER BOX
+       ========================================= */
+    .music-player {
+        position: fixed;
+        top: 25px;
+        right: 25px;
+        z-index: 100;
+        background: rgba(20, 10, 15, 0.55);
+        padding: 8px 24px 8px 8px; /* Pill shape padding */
+        border-radius: 50px;
+        border: 1px solid rgba(247, 197, 163, 0.3);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(232, 140, 125, 0.1);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        cursor: pointer;
+        transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        overflow: hidden;
+    }
+
+    /* Glass Reflection Sweep Effect */
+    .music-player::before {
+        content: '';
+        position: absolute;
+        top: 0; 
+        left: -100%; 
+        width: 50%; 
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+        transform: skewX(-25deg);
+        transition: 0.6s ease;
+        z-index: 1;
+    }
+
+    .music-player:hover::before {
+        left: 150%;
+    }
+
+    .music-player:hover {
+        transform: translateY(-4px) scale(1.02);
+        background: rgba(35, 18, 24, 0.75);
+        border-color: var(--primary-light);
+        box-shadow: 0 15px 40px rgba(232, 140, 125, 0.35), inset 0 0 20px rgba(232, 140, 125, 0.2);
+    }
+
+    /* Icon Container - Turns into a spinning vinyl when playing */
+    .music-player .icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #1c1218, #2a1a22);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary-light);
+        transition: all 0.4s ease;
+        border: 2px solid rgba(247, 197, 163, 0.4);
+        box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        position: relative;
+        z-index: 2;
+        flex-shrink: 0;
+    }
+
+    .music-player.playing .icon {
+        /* Beautiful conic gradient to simulate a glowing CD/Vinyl */
+        background: conic-gradient(from 0deg, var(--primary), var(--gold), var(--primary-dark), var(--primary));
+        border: 2px solid transparent;
+        animation: spin-vinyl 4s linear infinite;
+        box-shadow: 0 0 25px rgba(232, 140, 125, 0.7);
+    }
+
+    /* Keeps the inner icon/EQ straight while the border spins */
+    .music-player.playing .icon i,
+    .music-player.playing .icon .eq-bars {
+        animation: counter-spin 4s linear infinite; 
+    }
+
+    @keyframes spin-vinyl { 100% { transform: rotate(360deg); } }
+    @keyframes counter-spin { 100% { transform: rotate(-360deg); } }
+
+    .music-info {
+        display: flex;
+        flex-direction: column;
+        z-index: 2;
+        padding-right: 5px;
+    }
+
+    .music-title {
+        font-size: 0.75rem;
+        color: var(--primary-light);
+        text-transform: uppercase;
+        letter-spacing: 2.5px;
+        font-weight: 700;
+        margin-bottom: 3px;
+        text-shadow: 0 2px 10px rgba(247, 197, 163, 0.3);
+    }
+
+    .music-status {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text-main);
+        letter-spacing: 0.5px;
+    }
+
+    /* Equalizer Animation */
+    .eq-bars {
+        display: none;
+        align-items: flex-end;
+        gap: 3px;
+        height: 16px;
+    }
+
+    .music-player.playing .eq-bars {
+        display: flex;
+    }
+
+    .music-player.playing .icon i {
+        display: none;
+    }
+
+    .eq-bars span {
+        width: 3px;
+        background: #1c1218;
+        border-radius: 2px;
+        animation: eqBounce 0.8s ease-in-out infinite alternate;
+    }
+
+    .eq-bars span:nth-child(1) { animation-delay: 0s; }
+    .eq-bars span:nth-child(2) { animation-delay: 0.2s; }
+    .eq-bars span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes eqBounce {
+        0% { height: 4px; }
+        100% { height: 16px; }
+    }
+    .toast {
+        position: fixed;
+        bottom: -100px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(28, 16, 20, 0.95);
+        border: 1px solid var(--primary-light);
+        color: var(--text-main);
+        padding: 15px 30px;
+        border-radius: 50px;
+        max-width: 86vw;
+        font-weight: 600;
+        font-size: 0.95rem;
+        box-shadow: 0 20px 50px rgba(232, 140, 125, 0.2);
+        backdrop-filter: blur(16px);
+        z-index: 10000;
+        transition: bottom 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .toast.show {
+        bottom: 40px;
+    }
+
+    @keyframes floatContainer {
+        0% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-8px);
+        }
+        100% {
+            transform: translateY(0px);
+        }
+    }
+
+    .container {
+        background: var(--glass-bg);
+        backdrop-filter: blur(35px);
+        -webkit-backdrop-filter: blur(35px);
+        padding: 50px 45px;
+        border-radius: var(--radius);
+        box-shadow: var(--glass-shadow);
+        border: 1px solid var(--glass-border);
+        text-align: center;
+        max-width: 550px;
+        width: 92%;
+        max-height: 85vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        position: relative;
+        z-index: 10;
+        transition: all 0.4s ease;
+        animation: floatContainer 6s ease-in-out infinite;
+    }
+
+    .container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .progress-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: rgba(255,247,239,0.05);
+        border-radius: var(--radius) var(--radius) 0 0;
+        overflow: hidden;
+    }
+
+    .progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, var(--primary-dark), var(--primary), var(--gold));
+        width: 0%;
+        transition: width 0.8s ease;
+        box-shadow: 0 0 15px var(--primary);
+    }
+
+    h1 {
+        color: var(--primary-light);
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 2.8em;
+        font-weight: 700;
+        font-style: italic;
+        margin-bottom: 20px;
+        text-shadow: 0 4px 20px rgba(232,140,125,0.4);
+        line-height: 1.2;
+        letter-spacing: 1px;
+    }
+
+    .typing-text {
+        color: var(--text-muted);
+        font-size: 1.1em;
+        margin-bottom: 30px;
+        line-height: 1.8;
+        min-height: 60px;
+        font-weight: 400;
+    }
+
+    .gif-container {
+        margin-bottom: 30px;
+        height: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .gif-container img {
+        max-height: 100%;
+        max-width: 100%;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        border: 2px solid rgba(247,197,163,0.3);
+        transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .gif-container img:hover {
+        transform: scale(1.05) translateY(-5px);
+        box-shadow: 0 25px 50px rgba(232,140,125,0.3);
+    }
+
+    button {
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: #1a0a0d;
+        border: 1px solid rgba(255,247,239,0.4);
+        padding: 16px 36px;
+        border-radius: 50px;
+        font-size: 1.05em;
+        transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 12px 30px rgba(181, 73, 90, 0.4);
+        margin: 10px;
+        position: relative;
+        overflow: hidden;
+        letter-spacing: 0.5px;
+    }
+
+    button:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 40px rgba(232, 140, 125, 0.6);
+        border-color: #fff;
+        color: #000;
+    }
+
+    button:active {
+        transform: translateY(1px);
+    }
+
+    .btn-secondary {
+        background: var(--glass-card);
+        color: var(--primary-light);
+        border: 1px solid rgba(247,197,163,0.25);
+        font-size: 0.9em;
+        box-shadow: none;
+        font-weight: 600;
+    }
+
+    .btn-secondary:hover {
+        background: rgba(232,140,125,0.15);
+        color: #fff;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(232,140,125,0.2);
+        border-color: var(--primary-light);
+    }
+
+    .step {
+        display: none;
+        opacity: 0;
+        transform: scale(0.95) translateY(20px);
+        transition: all 0.5s ease-in-out;
+    }
+
+    .step.active {
+        display: block;
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+
+    @keyframes containerEntrance {
+        from {
+            opacity: 0;
+            transform: translateY(40px) scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .container {
+        animation: containerEntrance 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .photo-stack {
+        position: relative;
+        height: 320px;
+        margin: 20px auto;
+        width: 240px;
+    }
+
+    .photo {
+        position: absolute;
+        width: 220px;
+        height: 280px;
+        background: #fff;
+        padding: 12px 12px 45px 12px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+        border-radius: 4px;
+        transition: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        cursor: pointer;
+        left: 10px;
+        top: 10px;
+    }
+
+    .photo video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 2px;
+        background: #000;
+    }
+
+    .photo:nth-child(1) {
+        transform: rotate(-10deg) translateX(-15px);
+        z-index: 1;
+    }
+
+    .photo:nth-child(2) {
+        transform: rotate(8deg) translateX(15px);
+        z-index: 2;
+    }
+
+    .photo:nth-child(3) {
+        transform: rotate(-4deg) translateY(-5px);
+        z-index: 3;
+    }
+
+    .photo:nth-child(4) {
+        transform: rotate(12deg) translateY(10px);
+        z-index: 4;
+    }
+
+    .photo:nth-child(5) {
+        transform: rotate(-6deg) translateY(-10px);
+        z-index: 5;
+    }
+
+    .photo:hover {
+        transform: scale(1.15) rotate(0deg) translateY(-25px) !important;
+        z-index: 10;
+        box-shadow: 0 30px 60px rgba(232,140,125,0.5);
+    }
+
+    .timeline {
+        text-align: left;
+        margin: 35px 0;
+        border-left: 3px solid rgba(247, 197, 163, 0.4);
+        padding-left: 30px;
+        position: relative;
+    }
+
+    .timeline-item {
+        margin-bottom: 28px;
+        position: relative;
+    }
+
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -39px;
+        top: 4px;
+        width: 16px;
+        height: 16px;
+        background: var(--primary);
+        border-radius: 50%;
+        border: 3px solid #1c1218;
+        box-shadow: 0 0 15px var(--primary-light);
+    }
+
+    .t-date {
+        color: var(--primary-light);
+        font-weight: 700;
+        font-size: 0.85em;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+    }
+
+    .t-content {
+        background: var(--glass-card);
+        border: 1px solid var(--glass-border);
+        padding: 18px 20px;
+        border-radius: 16px;
+        font-size: 1em;
+        color: var(--text-muted);
+        line-height: 1.7;
+        transition: 0.3s;
+    }
+
+    .t-content:hover {
+        background: rgba(232, 140, 125, 0.1);
+        border-color: var(--primary-light);
+        transform: translateX(5px);
+    }
+
+    .bucket-list {
+        text-align: left;
+        margin: 30px 0;
+    }
+
+    .bucket-item,
+    .reasons-list li,
+    .future-list li {
+        background: var(--glass-card);
+        border: 1px solid var(--glass-border);
+        padding: 18px 20px;
+        margin-bottom: 14px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        transition: 0.4s ease;
+        color: var(--text-muted);
+        font-size: 1em;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    .reasons-list li,
+    .future-list li {
+        transform: translateX(-20px);
+        opacity: 0;
+        list-style: none;
+    }
+
+    .reasons-list li.show,
+    .future-list li.show {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    .bucket-item:hover,
+    .reasons-list li:hover,
+    .future-list li:hover {
+        transform: translateX(10px);
+        background: rgba(232,140,125,0.15);
+        border-color: var(--primary-light);
+        color: #fff;
+    }
+
+    .bucket-item.checked {
+        background: rgba(127, 217, 168, 0.2);
+        border-color: rgba(127, 217, 168, 0.5);
+        color: #fff;
+    }
+
+    .bucket-item.checked span {
+        opacity: 0.6;
+    }
+
+    .bucket-item.checked::after {
+        content: '✓';
+        margin-left: auto;
+        color: var(--correct);
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+
+    .quiz-options {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin: 30px 0;
+    }
+
+    .quiz-btn {
+        background: var(--glass-card);
+        border: 1px solid var(--glass-border);
+        color: var(--text-main);
+        padding: 18px;
+        border-radius: 16px;
+        font-weight: 600;
+        transition: 0.3s;
+        font-size: 1.05rem;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .quiz-btn:hover {
+        background: rgba(232,140,125,0.15);
+        border-color: var(--primary-light);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(232,140,125,0.2);
+    }
+
+    .quiz-btn.correct {
+        background: rgba(127, 217, 168, 0.25) !important;
+        color: var(--correct) !important;
+        border-color: var(--correct) !important;
+        box-shadow: 0 0 20px rgba(127, 217, 168, 0.4) !important;
+    }
+
+    .quiz-btn.wrong {
+        background: rgba(239, 138, 138, 0.25) !important;
+        color: var(--wrong) !important;
+        border-color: var(--wrong) !important;
+        animation: shake 0.5s;
+    }
+
+    @keyframes shake {
+        0%, 100% {
+            transform: translateX(0);
+        }
+        25% {
+            transform: translateX(-10px);
+        }
+        75% {
+            transform: translateX(10px);
+        }
+    }
+
+    .secret-container {
+        position: relative;
+        width: 100%;
+        height: 150px;
+        background: var(--glass-card);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border: 2px dashed rgba(247,197,163,0.4);
+        margin: 30px 0;
+        transition: 0.4s;
+        cursor: pointer;
+    }
+
+    .secret-container:hover {
+        border-color: var(--primary-light);
+        background: rgba(232,140,125,0.1);
+    }
+
+    .secret-blur {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(20, 10, 15, 0.95);
+        backdrop-filter: blur(12px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary-light);
+        font-weight: 700;
+        font-size: 1.25em;
+        letter-spacing: 1px;
+        z-index: 2;
+        transition: opacity 0.6s ease;
+    }
+
+    .secret-content {
+        z-index: 1;
+        font-size: 1.3em;
+        padding: 25px;
+        color: var(--text-main);
+        font-style: italic;
+        font-family: 'Cormorant Garamond', serif;
+        line-height: 1.5;
+    }
+
+    .promise-container {
+        background: var(--glass-card);
+        border: 1px solid var(--glass-border);
+        padding: 22px;
+        border-radius: 20px;
+        margin: 30px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        transition: 0.4s;
+        color: var(--text-muted);
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 1.05em;
+    }
+
+    .promise-container:hover {
+        background: rgba(232,140,125,0.1);
+        border-color: var(--primary-light);
+    }
+
+    .checkbox {
+        width: 30px;
+        height: 30px;
+        border: 2px solid rgba(247,197,163,0.5);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.4s;
+        flex-shrink: 0;
+    }
+
+    .promise-container.checked {
+        border-color: var(--primary);
+        color: #fff;
+        background: rgba(232,140,125,0.2);
+        box-shadow: 0 10px 30px rgba(232,140,125,0.2);
+    }
+
+    .promise-container.checked .checkbox {
+        background: var(--primary);
+        border-color: var(--primary);
+    }
+
+    .promise-container.checked .checkbox::after {
+        content: '✓';
+        color: #1a0a0d;
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+
+    .letter-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin: 30px 0;
+    }
+
+    .letter-btn {
+        background: var(--glass-card);
+        border: 1px solid var(--glass-border);
+        padding: 18px;
+        border-radius: 16px;
+        transition: 0.4s;
+        font-weight: 600;
+        color: var(--primary-light);
+        box-shadow: none;
+        font-size: 1.05em;
+        margin: 0;
+    }
+
+    .letter-btn:hover {
+        background: rgba(232,140,125,0.2);
+        border-color: var(--primary);
+        color: #fff;
+        transform: scale(1.05);
+    }
+
+    .letter-popup {
+        display: none;
+        background: rgba(0,0,0,0.6);
+        border: 1px solid var(--primary-light);
+        padding: 25px;
+        border-radius: 16px;
+        margin-top: 20px;
+        border-left: 5px solid var(--primary);
+        text-align: left;
+        color: #fff;
+        line-height: 1.7;
+        animation: fadeIn 0.5s ease;
+        font-size: 1.05em;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    input[type="date"] {
+        padding: 18px;
+        background: rgba(0,0,0,0.4);
+        border: 1px solid rgba(247,197,163,0.4);
+        border-radius: 16px;
+        width: 100%;
+        outline: none;
+        margin-top: 20px;
+        font-size: 1.1em;
+        color: #fff;
+        font-family: 'Montserrat', sans-serif;
+        color-scheme: dark;
+        transition: 0.3s;
+    }
+
+    input[type="date"]:focus {
+        border-color: var(--primary);
+        background: rgba(0,0,0,0.6);
+        box-shadow: 0 0 20px rgba(232,140,125,0.3);
+    }
+
+    .final-msg {
+        font-size: 1.1em;
+        color: var(--text-muted);
+        font-weight: 400;
+        line-height: 1.9;
+        margin-bottom: 35px;
+    }
+
+    .signature {
+        font-family: 'Cormorant Garamond', serif;
+        color: var(--primary-light);
+        font-size: 3.2em;
+        margin-bottom: 35px;
+        font-style: italic;
+        text-shadow: 0 4px 15px rgba(247,197,163,0.4);
+        font-weight: 700;
+    }
+
+    .whatsapp-btn {
+        background: linear-gradient(135deg, #25D366, #128C7E) !important;
+        color: #fff !important;
+        box-shadow: 0 15px 35px rgba(37, 211, 102, 0.4) !important;
+        width: calc(100% - 20px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        border: none;
+        font-size: 1.1em !important;
+        padding: 18px !important;
+        margin: 10px auto;
+    }
+
+    .whatsapp-btn:hover {
+        box-shadow: 0 20px 45px rgba(37, 211, 102, 0.6) !important;
+        border-color: transparent !important;
+    }
+
+    .bg-heart {
+        position: absolute;
+        font-size: 20px;
+        color: rgba(232, 140, 125, 0.6);
+        pointer-events: none;
+        animation: floatUp 3.5s ease-in forwards;
+        z-index: 0;
+    }
+
+    @keyframes floatUp {
+        0% {
+            transform: translateY(0) scale(1) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-150px) scale(1.8) rotate(20deg);
+            opacity: 0;
+        }
+    }
+
+    .media-modal {
+        display: none;
+        position: fixed;
+        z-index: 100000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(10, 6, 10, 0.95);
+        backdrop-filter: blur(15px);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .media-modal.show {
+        opacity: 1;
+    }
+
+    .modal-content {
+        position: relative;
+        max-width: 90%;
+        max-height: 85vh;
+        border-radius: 15px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 40px rgba(232, 140, 125, 0.3);
+        border: 2px solid rgba(247, 197, 163, 0.4);
+        animation: zoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        background: #000;
+    }
+
+    .modal-content video {
+        max-width: 100%;
+        max-height: 85vh;
+        display: block;
+        border-radius: 12px;
+    }
+
+    .close-modal {
+        position: absolute;
+        top: 20px;
+        right: 35px;
+        color: var(--primary-light);
+        font-size: 45px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+        z-index: 100001;
+    }
+
+    .close-modal:hover {
+        color: #fff;
+        transform: scale(1.1);
+    }
+
+    @keyframes zoomIn {
+        from {
+            transform: scale(0.8);
+            opacity: 0;
+        }
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    .preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 999999;
+        background: radial-gradient(ellipse at center, #2a141c 0%, #0a0608 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    .preloader.hide {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    .preloader-heart {
+        font-size: 3.5rem;
+        color: var(--primary);
+        animation: heartbeat 1.1s ease-in-out infinite;
+        filter: drop-shadow(0 0 20px rgba(232,140,125,0.7));
+    }
+
+    @keyframes heartbeat {
+        0%, 100% {
+            transform: scale(1);
+        }
+        15% {
+            transform: scale(1.25);
+        }
+        30% {
+            transform: scale(0.95);
+        }
+        45% {
+            transform: scale(1.15);
+        }
+        60% {
+            transform: scale(1);
+        }
+    }
+
+    .preloader-text {
+        margin-top: 22px;
+        color: var(--text-muted);
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        font-weight: 600;
+        animation: fadePulse 1.6s ease-in-out infinite;
+    }
+
+    @keyframes fadePulse {
+        0%,100% {
+            opacity: 0.4;
+        }
+        50% {
+            opacity: 1;
+        }
+    }
+
+    .ambient-layer {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    .ambient-particle {
+        position: absolute;
+        bottom: -40px;
+        opacity: 0;
+        color: var(--primary-light);
+        animation: ambientFloat linear forwards;
+    }
+
+    @keyframes ambientFloat {
+        0% {
+            transform: translateY(0) translateX(0) rotate(0deg) scale(0.6);
+            opacity: 0;
+        }
+        10% {
+            opacity: 0.65;
+        }
+        50% {
+            transform: translateY(-52vh) translateX(var(--drift, 20px)) rotate(180deg) scale(1);
+        }
+        90% {
+            opacity: 0.5;
+        }
+        100% {
+            transform: translateY(-105vh) translateX(calc(var(--drift, 20px) * 2)) rotate(360deg) scale(0.5);
+            opacity: 0;
+        }
+    }
+
+    .sparkle-field {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: visible;
+    }
+
+    .sparkle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--gold);
+        box-shadow: 0 0 8px 2px var(--gold);
+        animation: sparkleTwinkle 2.4s ease-in-out infinite;
+    }
+
+    @keyframes sparkleTwinkle {
+        0%, 100% {
+            opacity: 0;
+            transform: scale(0.4);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+    }
+
+    .container {
+        position: relative;
+        z-index: 10;
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary) transparent;
+    }
+
+    .container::before {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        border-radius: calc(var(--radius) + 2px);
+        padding: 2px;
+        z-index: -1;
+        background: conic-gradient(from var(--angle, 0deg), transparent 0%, var(--primary-light) 12%, transparent 24%, var(--gold) 50%, transparent 62%, var(--primary) 78%, transparent 100%);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        animation: rotateBorder 6s linear infinite;
+        opacity: 0.75;
+    }
+
+    @property --angle {
+        syntax: '<angle>';
+        initial-value: 0deg;
+        inherits: false;
+    }
+
+    @keyframes rotateBorder {
+        to {
+            --angle: 360deg;
+        }
+    }
+
+    .step-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-bottom: 22px;
+        flex-wrap: wrap;
+        padding: 0 6px;
+    }
+
+    .step-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: rgba(255,247,239,0.18);
+        transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .step-dot.done {
+        background: var(--primary-light);
+        box-shadow: 0 0 8px rgba(247,197,163,0.6);
+    }
+
+    .step-dot.current {
+        width: 20px;
+        border-radius: 5px;
+        background: linear-gradient(90deg, var(--primary), var(--gold));
+        box-shadow: 0 0 12px rgba(232,140,125,0.7);
+    }
+
+    button {
+        will-change: transform;
+    }
+
+    button::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -75%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
+        transform: skewX(-20deg);
+        transition: left 0.001s;
+    }
+
+    button:hover::after {
+        left: 130%;
+        transition: left 0.75s ease;
+    }
+
+    .ripple {
+        position: absolute;
+        border-radius: 50%;
+        transform: scale(0);
+        background: rgba(255,255,255,0.55);
+        animation: rippleAnim 0.65s ease-out;
+        pointer-events: none;
+    }
+
+    @keyframes rippleAnim {
+        to {
+            transform: scale(2.8);
+            opacity: 0;
+        }
+    }
+
+    .photo-stack {
+        perspective: 1000px;
+        transform-style: preserve-3d;
+    }
+
+    .photo {
+        will-change: transform;
+    }
+
+    .eq-bars {
+        display: none;
+        align-items: flex-end;
+        gap: 2px;
+        height: 14px;
+    }
+
+    .music-player.playing .eq-bars {
+        display: flex;
+    }
+
+    .music-player.playing .icon i {
+        display: none;
+    }
+
+    .eq-bars span {
+        width: 3px;
+        background: #1c1218;
+        border-radius: 2px;
+        animation: eqBounce 0.9s ease-in-out infinite;
+    }
+
+    .eq-bars span:nth-child(1) {
+        animation-delay: 0s;
+    }
+    
+    .eq-bars span:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+    
+    .eq-bars span:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+
+    @keyframes eqBounce {
+        0%, 100% {
+            height: 4px;
+        }
+        50% {
+            height: 14px;
+        }
+    }
+
+    h1 {
+        background: linear-gradient(100deg, var(--primary-light) 30%, #fff 45%, var(--gold) 55%, var(--primary-light) 70%);
+        background-size: 250% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shimmerText 5s linear infinite;
+    }
+
+    @keyframes shimmerText {
+        to {
+            background-position: -250% center;
+        }
+    }
+
+    .toast .toast-icon {
+        display: inline-block;
+        animation: iconPop 0.5s cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    @keyframes iconPop {
+        0% {
+            transform: scale(0) rotate(-30deg);
+        }
+        60% {
+            transform: scale(1.3) rotate(8deg);
+        }
+        100% {
+            transform: scale(1) rotate(0);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .container::before {
+            animation-duration: 8s;
+        }
+    }
+    /* =========================================
+       🎵 EXPANDED SPOTIFY-STYLE PLAYER
+       ========================================= */
+    .spotify-overlay {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(10, 6, 10, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        z-index: 100000;
+        display: none; /* Flex when active */
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+    .spotify-overlay.show { opacity: 1; }
+    
+    .spotify-modal {
+        background: var(--glass-bg);
+        border: 1px solid var(--primary-light);
+        padding: 40px 30px;
+        border-radius: 35px;
+        width: 90%;
+        max-width: 380px;
+        text-align: center;
+        box-shadow: 0 30px 70px rgba(0,0,0,0.9), inset 0 0 30px rgba(232, 140, 125, 0.15);
+        position: relative;
+        transform: scale(0.9) translateY(30px);
+        transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .spotify-overlay.show .spotify-modal { transform: scale(1) translateY(0); }
+    
+    .close-player {
+        position: absolute; top: 20px; right: 25px; 
+        font-size: 35px; cursor: pointer; color: var(--text-muted);
+        transition: 0.3s; line-height: 1;
+    }
+    .close-player:hover { color: var(--wrong); transform: rotate(90deg); }
+    
+    .album-art-container {
+        width: 200px; height: 200px;
+        border-radius: 50%;
+        margin: 0 auto 30px;
+        background: conic-gradient(from 0deg, var(--primary), var(--gold), var(--primary-dark), var(--primary));
+        border: 5px solid rgba(247, 197, 163, 0.3);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        display: flex; justify-content: center; align-items: center;
+        animation: spin-vinyl 6s linear infinite paused;
+    }
+    .spotify-modal.is-playing .album-art-container { animation-play-state: running; }
+    
+    .vinyl-center {
+        width: 45px; height: 45px; background: #1c1218; border-radius: 50%;
+        border: 3px solid var(--primary-light);
+    }
+    
+    .song-details h2 { color: #fff; font-size: 1.5rem; margin-bottom: 5px; font-family: 'Montserrat', sans-serif;}
+    .song-details p { color: var(--primary-light); font-size: 0.95rem; margin-bottom: 30px; font-weight: 500;}
+    
+    .progress-area { margin-bottom: 30px; }
+    .progress-bar-bg { 
+        width: 100%; height: 6px; background: rgba(255,255,255,0.15); 
+        border-radius: 10px; cursor: pointer; position: relative; 
+    }
+    .progress-current { 
+        height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--gold)); 
+        border-radius: 10px; position: relative; box-shadow: 0 0 15px var(--primary);
+    }
+    .progress-current::after { 
+        content: ''; position: absolute; right: -6px; top: -5px; 
+        width: 16px; height: 16px; background: #fff; border-radius: 50%; 
+        box-shadow: 0 0 10px var(--primary); 
+    }
+    .time-info { 
+        display: flex; justify-content: space-between; font-size: 0.8rem; 
+        color: var(--text-muted); margin-top: 10px; font-weight: 600; 
+    }
+    
+    .controls { display: flex; justify-content: center; align-items: center; gap: 30px; }
+    .ctrl-btn { 
+        background: none; border: none; color: var(--text-muted); 
+        font-size: 1.6rem; cursor: pointer; padding: 0; box-shadow: none; margin: 0; transition: 0.3s;
+    }
+    .ctrl-btn:hover { color: var(--primary-light); transform: scale(1.15); }
+    .ctrl-btn::after { display: none; } /* Removes global button ripple */
+    
+    .play-btn { 
+        width: 75px; height: 75px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); 
+        border-radius: 50%; display: flex; justify-content: center; align-items: center; 
+        font-size: 2rem; box-shadow: 0 12px 30px rgba(232, 140, 125, 0.4); color: #1c1218;
+    }
+    .play-btn:hover { background: #fff; color: #000; box-shadow: 0 15px 40px rgba(255, 255, 255, 0.4); }
+</style>
+</head>
+<body>
+
+    <div class="preloader" id="preloader">
+        <div class="preloader-heart">❤️</div>
+        <div class="preloader-text">Loading our story.</div>
+    </div>
+
+    <div class="ambient-layer" id="ambientLayer"></div>
+    <div class="noise-overlay"></div>
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    <audio id="bgMusic" preload="auto"></audio>
+    <div class="music-player" onclick="openMusicPlayer()">
+        <div class="icon" id="musicIcon"><i class="fas fa-music"></i><div class="eq-bars"><span></span><span></span><span></span></div></div>
+        <div class="music-info">
+            <span class="music-title" id="miniTitle">Our Playlist</span>
+            <span class="music-status" id="musicStatus">Tap to Open</span>
+        </div>
+    </div>
+
+    <div class="spotify-overlay" id="spotifyPlayer">
+        <div class="spotify-modal">
+            <div class="close-player" onclick="closeMusicPlayer()">&times;</div>
+            <div class="album-art-container" id="albumArtContainer">
+                <div class="vinyl-center"></div>
+            </div>
+            <div class="song-details">
+                <h2 id="spTitle">Loading... </h2>
+                <p id="spArtist">Please wait</p>
+            </div>
+            <div class="progress-area">
+                <div class="progress-bar-bg" id="progressBg" onclick="seekMusic(event)">
+                    <div class="progress-current" id="progressCurrent"></div>
+                </div>
+                <div class="time-info">
+                    <span id="currentTime">0:00</span>
+                    <span id="totalTime">0:00</span>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="ctrl-btn" onclick="prevSong()"><i class="fas fa-step-backward"></i></button>
+                <button class="ctrl-btn play-btn" onclick="togglePlayPause()" id="mainPlayBtn"><i class="fas fa-play"></i></button>
+                <button class="ctrl-btn" onclick="nextSong()"><i class="fas fa-step-forward"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">✨ Action Successful!</div>
+
+    <div class="container" id="mainContainer">
+        <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+        <div class="sparkle-field">
+            <div class="sparkle" style="top:6%; left:8%; animation-delay:0s;"></div>
+            <div class="sparkle" style="top:14%; left:88%; animation-delay:0.8s;"></div>
+            <div class="sparkle" style="top:40%; left:3%; animation-delay:1.4s;"></div>
+            <div class="sparkle" style="top:70%; left:92%; animation-delay:0.4s;"></div>
+        </div>
+        <div class="step-dots" id="stepDots"></div>
+
+        <div class="step active" id="step1">
+            <div class="gif-container"><img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5YnZ3eHh6cW55YnZ3eHh6cW55YnZ3eHh6cW55/26FLdmIp6wJr91JAI/giphy.gif" alt="Hi"></div>
+            <h1>Divya... </h1>
+            <p class="typing-text" data-text="Ek baat kehni thi tumse... sunogi?"></p>
+            <button id="startBtn" onclick="nextStep(2)">Haan bolo... ❤️</button>
+        </div>
+
+        <div class="step" id="step2">
+            <h1>Our Journey</h1>
+            <div class="timeline">
+                <div class="timeline-item"><div class="t-date">The Beginning</div>
+                <div class="t-content">The first time our eyes met. "Yaar ye kitni cute hai!" 😍</div></div>
+                <div class="timeline-item"><div class="t-date">Growing Closer</div>
+                <div class="t-content">Those small conversations that meant the whole world to me. ✨</div></div>
+                <div class="timeline-item"><div class="t-date">The Hard Times</div>
+                <div class="t-content">Distance tried its best, but my heart never stopped caring. 🕰️</div></div>
+                <div class="timeline-item"><div class="t-date">Today</div>
+                <div class="t-content">You are here. And I'm the happiest man alive. ❤️</div></div>
+            </div>
+            <button onclick="nextStep(3)">See Memories 📸</button>
+            <br><button class="btn-secondary" onclick="prevStep(1)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step3">
+            <h1>Memories</h1>
+            <div class="photo-stack">
+                <div class="photo"><video src="https://cdn.jsdelivr.net/gh/shubhamsanap1092-dot/love-story@main/divya_avhad04_20260621_143100_148.mp4" autoplay loop muted playsinline></video></div>
+                <div class="photo"><video src="https://cdn.jsdelivr.net/gh/shubhamsanap1092-dot/love-story@main/divya_avhad04_20260621_143100_665.mp4" autoplay loop muted playsinline></video></div>
+                <div class="photo"><video src="https://cdn.jsdelivr.net/gh/shubhamsanap1092-dot/love-story@main/divya_avhad04_20260621_143038_719.mp4" autoplay loop muted playsinline></video></div>
+                <div class="photo"><video src="https://cdn.jsdelivr.net/gh/shubhamsanap1092-dot/love-story@main/divya_avhad04_20260621_143053_187.mp4" autoplay loop muted playsinline></video></div>
+                <div class="photo"><video src="https://cdn.jsdelivr.net/gh/shubhamsanap1092-dot/love-story@main/divya_avhad04_20260621_143056_100.mp4" autoplay loop muted playsinline></video></div>
+            </div>
+            <p style="margin-top: 30px; color: var(--text-muted); font-style: italic; font-size: 1.1em;">Har lamha bas inhi yaadon ke sahare jiya hoon main.</p>
+            <button onclick="nextStep(4)">I felt it too... 💔</button>
+            <br><button class="btn-secondary" onclick="prevStep(2)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step4">
+            <h1>Look At You...</h1>
+            <p class="typing-text" data-text="Tumhe dekh ke kon pighal nahi jayega... ❤️🔥" style="font-size: 1.25em; font-weight: 600; color: var(--primary-light);"></p>
+
+            <div class="photo-stack" style="height: 320px; margin-bottom: 40px;">
+                <div class="photo">
+                    <img src="https://raw.githubusercontent.com/shubhamsanap1092-dot/love-story/main/Screenshot_20260709-141550_Instagram~2.png" 
+                         alt="Beautiful Pic 1" 
+                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+                </div>
+                <div class="photo">
+                    <img src="https://raw.githubusercontent.com/shubhamsanap1092-dot/love-story/main/Screenshot_20260709-141359_Instagram~2.png" 
+                         alt="Beautiful Pic 2" 
+                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+                </div>
+            </div>
+
+            <button onclick="nextStep(5)">Continue ✨</button>
+            <br><button class="btn-secondary" onclick="prevStep(3)">⬅️ Go Back</button>
+        </div>
+        
+        <div class="step" id="step5">
+            <div class="gif-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7GF-OIzZmrKkg7Dy2RsVGVt5sOZrt4-BfiQ&s" alt="Promise"></div>
+            <h1>Ek Promise chahiye?</h1>
+            <p style="font-size: 1.1em; line-height: 1.6; margin-bottom: 20px;">Divya, ab bas ek promise chahiye... ki tum ab mujhe kabhi akela nahi chodogi?</p>
+            <div class="promise-container" onclick="togglePromise()">
+                <div class="checkbox"></div><span> Yes I promise Humesha saath rahungi, Pakka! 🤞</span>
+            </div>
+            <button id="promiseBtn" onclick="nextStep(6)" style="opacity: 0.4; pointer-events: none;">Promise Locked 🔒</button>
+            <br><button class="btn-secondary" onclick="prevStep(4)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step6">
+            <h1>Our Bucket List 📝</h1>
+            <div class="bucket-list">
+                <div class="bucket-item" onclick="toggleCheck(this)"><span>🍜</span> Eat Late Night Maggi together</div>
+                <div class="bucket-item" onclick="toggleCheck(this)"><span>🚗</span> Long Drive in Rain</div>
+                <div class="bucket-item" onclick="toggleCheck(this)"><span>🏔️</span> Trip to the Mountains</div>
+                <div class="bucket-item" onclick="toggleCheck(this)"><span>🏠</span> Build our Dream House</div>
+                <div class="bucket-item" onclick="toggleCheck(this)"><span>👗</span> Matching Outfits on a Date</div>
+            </div>
+            <button onclick="nextStep(7)">Dil Ki Baat... 💖</button>
+            <br><button class="btn-secondary" onclick="prevStep(5)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step7">
+            <div class="gif-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSH8-_mI-cjZDCRYhfraRD7-pBE6OLDPaTUHQ&s" alt="Flower"></div>
+            <h1>Dil ki baat bolu... </h1>
+            <p class="typing-text" data-text="You are my diamond, Divya! I respect you and everything about you more than words can say. Will you be mine?"></p>
+            <div style="margin-top: 40px; height: 70px; position: relative; display: flex; justify-content: center; gap: 20px;">
+                <button onclick="handleYes()">Yes, I'm Yours! 💖</button>
+                <button id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()">No 💔</button>
+            </div>
+            <br><button class="btn-secondary" onclick="prevStep(6)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step8">
+            <h1>Chalo Date Fix Karte Hai!</h1>
+            <input type="date" id="dateInput">
+            <br><br>
+            <button onclick="nextStep(9)">Date Locked! 📅</button>
+            <br><button class="btn-secondary" onclick="prevStep(7)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step9">
+            <div class="gif-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRByTdvwrgoNwrlaFIfh8KrKbX5Pmj8scjVcA&s" alt="Hug"></div>
+            <h1>Finally! 😭❤️</h1>
+            <p style="font-size: 1.1em;">You made me the happiest person alive. Here is a small gift for your moods.</p>
+            <div class="letter-grid">
+                <button class="letter-btn" onclick="showLetter('sad')">😢 Sad</button>
+                <button class="letter-btn" onclick="showLetter('happy')">😄 Happy</button>
+                <button class="letter-btn" onclick="showLetter('miss')">🥺 Missing Me</button>
+                <button class="letter-btn" onclick="showLetter('angry')">😠 Angry</button>
+            </div>
+            <div id="letter-content" class="letter-popup"></div>
+            <button onclick="nextStep(10)" style="margin-top:30px;">Why only You? 😍</button>
+            <br><button class="btn-secondary" onclick="prevStep(8)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step10">
+            <h1>Why only You?</h1>
+            <ul class="reasons-list">
+                <li><span>🌍</span> Duniya mein hazaron log hain, par mujhe sirf tum chahiye.</li>
+                <li><span>📻</span> Tum ENTC ki signals si pyari ho, aur main IT ke server sa hamesha available.</li>
+                <li><span>🩹</span> You healed the heart you didn't break.</li>
+                <li><span>🗣️</span> Tumhari awaaz sunkar hi mera din banta hai.</li>
+                <li><span>🤝</span> Waada raha, ab kabhi tumhe khud se door nahi hone dunga.</li>
+                <li><span>🌙</span> You are the moon in my darkest nights.</li>
+                <li><span>🦋</span> Tumhe dekh kar aaj bhi mujhe butterflies aati hain.</li>
+                <li><span>🌧️</span> Barish mein tumhara haath pakad kar chalna hai.</li>
+                <li><span>📖</span> Hamari love story meri favorite kahani hai.</li>
+                <li><span>🧿</span> Bas tumhe meri umar lag jaye.</li>
+            </ul>
+            <br><button onclick="nextStep(11)">One More Message 💌</button>
+            <br><button class="btn-secondary" onclick="prevStep(9)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step11">
+            <div class="gif-container"><img src="https://blogs.mathworks.com/matlab/files/2024/02/animatingFlickbook_1.gif" alt="First Sight"></div>
+            <h1>Woh Pehli Baar... </h1>
+            <p class="typing-text" data-text="I perfectly remember the first time I saw you. Everything just stopped, and I knew right then that you were the one I had been looking for."></p>
+            <button onclick="nextStep(12)">Future Plans? 🏠</button>
+            <br><button class="btn-secondary" onclick="prevStep(10)">⬅️ Go Back</button>
+        </div>
+            
+        <div class="step" id="step12">
+            <h1>Sapne... 💭</h1>
+            <ul class="future-list">
+                <li><span>🍜</span> Late night Maggi & Movies.</li>
+                <li><span>🚗</span> Long drives pe tera haath pakadna.</li>
+                <li><span>☕</span> Tere haath ki subah wali chai.</li>
+                <li><span>🏔️</span> Exploring the world with you.</li>
+                <li><span>🏠</span> Building our dream home.</li>
+                <li><span>💻🔌</span> Mera IT ka code aur teri ENTC ki circuits... perfect connection! </li>
+                <li><span>🧥💑</span> Matching outfits everywhere we go.</li>
+                <li><span>⚙️</span> Humari frequency aur algorithms ek dusre se perfectly match karte hain. </li>
+                <li><span>💍</span> Humesha ka saath. </li>
+            </ul>
+            <br><button onclick="nextStep(13)">Let's Play a Quiz! 🧠</button>
+            <br><button class="btn-secondary" onclick="prevStep(11)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step13">
+            <h1>❤️ Love Quiz ❤️</h1>
+            <p id="quizQuestion" style="font-size: 1.2em; margin-bottom: 25px; font-weight: 500;">Tumhari Favorite Cheez Kya Hai?</p>
+            <div class="quiz-options">
+                <button class="quiz-btn" onclick="checkAnswer(this, false)">Shopping</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, true)">Shubham</button>
+                <button class="quiz-btn" onclick="checkAnswer(this, false)">Food</button>
+            </div>
+            <p id="quizFeedback" style="min-height:35px; font-weight:700; margin-top:25px; font-size:1.2em; text-align: center;"></p>
+            <button id="nextQuizBtn" style="display:none; margin-top:20px;" onclick="nextQuiz()">Next Question ➡️</button>
+            <br><button class="btn-secondary" onclick="prevStep(12)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step14">
+            <h1>A Secret Message 🤫</h1>
+            <p style="margin-bottom: 30px; font-size: 1.1em;">Tap below to reveal what's hidden in my heart...</p>
+            <div class="secret-container" onclick="revealSecret(this)">
+                <div class="secret-blur">Tap to Reveal ✨</div>
+                <div class="secret-content">Tum meri Divya ho, aur main tumhara humesha ka pagal. ❤️</div>
+            </div>
+            <button onclick="nextStep(15)">Final Surprise 🎁</button>
+            <br><button class="btn-secondary" onclick="prevStep(13)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step15">
+            <div class="gif-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGcG0TyV4HmayeHRN0j-ExELYmwafPyOfSSA&s" style="border-radius:50%; width: 160px; height: 160px; object-fit: cover;"></div>
+            <h1 style="font-size: 2.3em;">Permanent Password Banogi? 💍</h1>
+            <p class="typing-text" data-text="Ye ring ek waada hai, ki mera pyaar tumhare liye kabhi kam nahi hoga."></p>
+            <button onclick="nextStep(16)">I Accept! 💖</button>
+            <br><button class="btn-secondary" onclick="prevStep(14)">⬅️ Go Back</button>
+        </div>
+
+        <div class="step" id="step16">
+            <div class="gif-container"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6-uY5t5F9hC3gO-2f6yP1y6W7s3q3m1r2xw&s"></div>
+            <div style="font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-style: italic; font-weight: 700; color: var(--primary-light); margin-bottom: 20px; line-height: 1.1;">
+                I Love You More<br>than self... <span style="font-size: 0.7em; font-style: normal;">❤️</span>
+            </div>
+            <p class="final-msg">Shabdon mein bayan nahi kar sakta ki tum mere liye kya ho. Bas itna jaan lo, jab tak saansein hain, tab tak tumhara saath chahiye. I Love You Divya! Infinite times!</p>
+            <div class="signature">Yours Forever,<br>Shubham</div>
+            
+            <div style="margin-top: 35px;">
+                <button class="whatsapp-btn" onclick="sendWhatsApp()"><i class="fab fa-whatsapp"></i> I Love You Too! </button>
+                <br>
+                <button class="btn-secondary" onclick="prevStep(15)">⬅️ Go Back</button>
+                <button class="btn-secondary" onclick="location.reload()">🔄 Restart</button>
+            </div>
+        </div>
+
+    </div>
+    
+    <div id="mediaModal" class="media-modal" onclick="closeModal(event)">
+    <span class="close-modal">&times;</span>
+    <div class="modal-content">
+        <video id="modalVideo" controls autoplay loop playsinline style="display: none;"></video>
+        <img id="modalImage" style="display: none; max-width: 100%; max-height: 85vh; border-radius: 12px; object-fit: contain;">
+    </div>
+</div>
+
+    <script>
+        var phoneNumber = "919022365118"; 
+        var totalSteps = 16;
+        var quizStep = 0;
+        const quizData = [
+            { q: "Tumhari Favorite Cheez Kya Hai?", options: ["Shopping", "Shubham", "Food"], correct: 1 },
+            { q: "Meri favorite late night snack kya hai?", options: ["Pizza", "Maggi", "Burger"], correct: 1 },
+            { q: "Sabse zyada pyaar kaun karta hai?", options: ["Divya","Dono Barabar" ,"Shubham"], correct: 1 }
+        ];
+
+        const cursorDot = document.querySelector('[data-cursor-dot]');
+        const cursorOutline = document.querySelector('[data-cursor-outline]');
+        window.addEventListener("mousemove", (e) => {
+            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 300, fill: "forwards" });
+        });
+
+        document.querySelectorAll('button, .photo, .checkbox, .secret-container, .letter-btn, .bucket-item, input').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+        });
+
+        document.body.addEventListener('click', (e) => {
+            if(e.target.tagName === 'BUTTON' || e.target.closest('button')) return;
+            const heart = document.createElement('div');
+            heart.classList.add('bg-heart');
+            heart.innerHTML = ['❤️','💖','✨'][Math.floor(Math.random()*3)];
+            heart.style.left = `${e.clientX - 10}px`;
+            heart.style.top = `${e.clientY - 10}px`;
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 3500);
+        });
+
+        function showToast(msg, icon="✨") {
+            const toast = document.getElementById('toast');
+            toast.innerHTML = `<span class="toast-icon">${icon}</span> ${msg}`;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3500);
+        }
+
+        const audio = document.getElementById("bgMusic");
+        let musicStarted = false;
+        let songIndex = 0;
+
+        const playlist = [
+            {
+                title: "Tola Tola",
+                artist: "Bela Shende & Amitraj",
+                src: "https://raw.githubusercontent.com/shubhamsanap1092-dot/SHUBHAM-/main/%E0%A4%A4%E0%A5%8B%E0%A4%B3%E0%A4%BE%20%E0%A4%A4%E0%A5%8B%E0%A4%B3%E0%A4%BE%20%20Tola%20Tola%20%20Romantic%20Song%20%20Bela%20Shende%2C%20Amitraj%20%20Tu%20Hi%20Re%20%20Swwapnil%2C%20Sai%2C%20Tejaswini%20-%20Video%20Palace.mp3"
+            },
+            {
+                title: "Apna Bana Le",
+                artist: "Arijit Singh",
+                src: "https://raw.githubusercontent.com/shubhamsanap1092-dot/SHUBHAM-/main/Apna%20Bana%20Le%20-%20Bhediya%20%20Varun%20Dhawan%2C%20Kriti%20Sanon%20Sachin-Jigar%2C%20Arijit%20Singh%2C%20Amitabh%20Bhattacharya%20-%20Romance%20Rewind.mp3"
+            },
+            {
+                title: "Main Hoon Saath Tere",
+                artist: "Arijit Singh",
+                src: "https://raw.githubusercontent.com/shubhamsanap1092-dot/SHUBHAM-/main/Main%20Hoon%20Saath%20Tere%20-%20Full%20Audio%20%20Shaadi%20Mein%20Zaroor%20Aana%20%20Rajkummar%20Rao%2C%20Kriti%20%20Arijit%20Singh%20-%20Bollywood%20Love%20Vibes.mp3"
+            },
+            {
+                title: "Zaalima",
+                artist: "Arijit Singh & Harshdeep Kaur",
+                src: "https://raw.githubusercontent.com/shubhamsanap1092-dot/SHUBHAM-/main/Zaalima%20-%20Arijit%20Singh%20%20Shah%20Rukh%20Khan%20%20Raees%20%20Harshdeep%20Kaur%20%20Valentine%E2%80%99s%20Special%20Love%20Song%20-%20Zee%20Music%20Company.mp3"
+            },
+            {
+                title: "Angaaron X Rani Majhya (Mashup)",
+                artist: "DJ Karansuraj",
+                src: "https://raw.githubusercontent.com/shubhamsanap1092-dot/SHUBHAM-/main/Angaaron%20X%20Rani%20Majhya%20Malyamandi%20Mashup%20%20Dj%20Karansuraj%20%20Marathi%20Mashup%20%20Pushpa%202%20-%20DJ%20KARANSURAJ.mp3"
+            },
+            {
+                title: "Tera Ban Jaunga",
+                artist: "Akhil Sachdeva & Tulsi Kumar",
+                src: "https://raw.githubusercontent.com/shubhamsanap1092-dot/love-story/main/LYRICAL%20Tera%20Ban%20Jaunga%20%20Kabir%20Singh%20%20Shahid%20K%2C%20Kiara%20A%2C%20Sandeep%20V%20%20Tulsi%20Kumar%2C%20Akhil%20Sachdeva%20-%20T-Series.mp3"
+            },
+            {
+                title: "Tum Se Hi",
+                artist: "Mohit Chauhan",
+                src: "https://raw.githubusercontent.com/shubhamsanap1092-dot/love-story/main/Tum%20Se%20Hi%20Lyrcial%20%20Jab%20We%20Met%20%20Kareena%20Kapoor%2C%20Shahid%20Kapoor%20%20Mohit%20Chauhan%20%20Pritam%20-%20T-Series.mp3"
+            }
+        ];
+        function loadSong(index) {
+            audio.src = playlist[index].src;
+            document.getElementById('spTitle').innerText = playlist[index].title;
+            document.getElementById('spArtist').innerText = playlist[index].artist;
+            document.getElementById('miniTitle').innerText = playlist[index].title;
+        }
+        
+        loadSong(songIndex);
+
+        function togglePlayPause() {
+            if (audio.paused) {
+                audio.play();
+                musicStarted = true;
+                syncUI(true);
+            } else {
+                audio.pause();
+                syncUI(false);
+            }
+        }
+
+        function startMusicFlow() {
+            if (!musicStarted) {
+                audio.play().then(() => {
+                    musicStarted = true; syncUI(true);
+                }).catch(e => console.log("Autoplay blocked"));
+            }
+        }
+
+        function syncUI(isPlaying) {
+            const miniPlayer = document.querySelector('.music-player');
+            const spotifyModal = document.querySelector('.spotify-modal');
+            const mainPlayBtn = document.getElementById('mainPlayBtn');
+            const icon = document.getElementById('musicIcon');
+            const status = document.getElementById('musicStatus');
+
+            if(isPlaying) {
+                miniPlayer.classList.add('playing');
+                spotifyModal.classList.add('is-playing');
+                mainPlayBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                icon.innerHTML = '<div class="eq-bars"><span></span><span></span><span></span></div>';
+                status.innerText = "Playing...";
+            } else {
+                miniPlayer.classList.remove('playing');
+                spotifyModal.classList.remove('is-playing');
+                mainPlayBtn.innerHTML = '<i class="fas fa-play"></i>';
+                icon.innerHTML = '<i class="fas fa-music"></i>';
+                status.innerText = "Paused";
+            }
+        }
+
+        function nextSong() {
+            songIndex++;
+            if (songIndex > playlist.length - 1) songIndex = 0; // Loop back to start
+            loadSong(songIndex);
+            audio.play();
+            syncUI(true);
+        }
+
+        function prevSong() {
+            songIndex--;
+            if (songIndex < 0) songIndex = playlist.length - 1; // Go to last song
+            loadSong(songIndex);
+            audio.play();
+            syncUI(true);
+        }
+
+        audio.addEventListener("ended", nextSong);
+
+        audio.addEventListener("timeupdate", (e) => {
+            const currentTime = e.target.currentTime;
+            const duration = e.target.duration;
+            let progressWidth = (currentTime / duration) * 100;
+            document.getElementById("progressCurrent").style.width = `${progressWidth}%`;
+
+            let currentMin = Math.floor(currentTime / 60);
+            let currentSec = Math.floor(currentTime % 60);
+            if(currentSec < 10) currentSec = `0${currentSec}`;
+            document.getElementById("currentTime").innerText = `${currentMin}:${currentSec}`;
+            
+            if(duration) {
+                let totalMin = Math.floor(duration / 60);
+                let totalSec = Math.floor(duration % 60);
+                if(totalSec < 10) totalSec = `0${totalSec}`;
+                document.getElementById("totalTime").innerText = `${totalMin}:${totalSec}`;
+            }
+        });
+
+        function seekMusic(e) {
+            const progressBg = document.getElementById("progressBg");
+            let clickX = e.offsetX;
+            let totalWidth = progressBg.clientWidth;
+            let duration = audio.duration;
+            audio.currentTime = (clickX / totalWidth) * duration;
+        }
+
+        function openMusicPlayer() {
+            const overlay = document.getElementById('spotifyPlayer');
+            overlay.style.display = 'flex';
+            setTimeout(() => overlay.classList.add('show'), 10);
+        }
+
+        function closeMusicPlayer() {
+            const overlay = document.getElementById('spotifyPlayer');
+            overlay.classList.remove('show');
+            setTimeout(() => overlay.style.display = 'none', 400);
+        }
+
+        document.getElementById('spotifyPlayer').addEventListener('click', (e) => {
+            if (e.target.id === 'spotifyPlayer') closeMusicPlayer();
+        });
+
+        function updateProgress(stepNumber) {
+            const progress = (stepNumber / totalSteps) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            document.querySelectorAll('.step-dot').forEach((dot, idx) => {
+                const n = idx + 1;
+                dot.classList.remove('done', 'current');
+                if (n < stepNumber) dot.classList.add('done');
+                else if (n === stepNumber) dot.classList.add('current');
+            });
+        }
+
+        function buildStepDots() {
+            const wrap = document.getElementById('stepDots');
+            let html = '';
+            for (let i = 1; i <= totalSteps; i++) html += `<div class="step-dot"></div>`;
+            wrap.innerHTML = html;
+        }
+
+        function nextStep(stepNumber) {
+            if(stepNumber === 2 && !musicStarted) startMusicFlow();
+            const currentStep = document.querySelector('.step.active');
+            const nextStep = document.getElementById('step' + stepNumber);
+            
+            if(currentStep) currentStep.classList.remove('active');
+            
+            if(nextStep) {
+                setTimeout(() => {
+                    nextStep.classList.add('active');
+                    updateProgress(stepNumber);
+                    const typingEl = nextStep.querySelector('.typing-text');
+                    if (typingEl) typeWriter(typingEl, typingEl.getAttribute('data-text'));
+                    if (stepNumber === 10 || stepNumber === 12) animateList(stepNumber);
+                }, 400);
+            }
+        }
+
+        function prevStep(stepNumber) {
+            const currentStep = document.querySelector('.step.active');
+            const prevStep = document.getElementById('step' + stepNumber);
+            if(currentStep) currentStep.classList.remove('active');
+            if(prevStep) {
+                setTimeout(() => { prevStep.classList.add('active'); updateProgress(stepNumber); }, 400);
+            }
+        }
+
+        function typeWriter(element, text, speed = 40) {
+            element.innerHTML = ""; let i = 0;
+            function type() {
+                if (i < text.length) { element.innerHTML += text.charAt(i); i++; setTimeout(type, speed); }
+            }
+            type();
+        }
+
+        function checkAnswer(btn, isCorrect) {
+            const allBtns = document.querySelectorAll('.quiz-options .quiz-btn');
+            allBtns.forEach(b => b.style.pointerEvents = 'none'); 
+            
+            if(isCorrect) {
+                btn.classList.add('correct');
+                document.getElementById('quizFeedback').innerHTML = "<span style='color:var(--correct)'>Sahi Jawab! 😍</span>";
+                createConfetti(); showToast("Correct Answer! 🎉", "✅");
+            } else {
+                btn.classList.add('wrong');
+                document.getElementById('quizFeedback').innerHTML = "<span style='color:var(--wrong)'>Galat! 🥺</span>";
+                showToast("Oops, wrong answer!", "❌");
+            }
+            
+            setTimeout(() => {
+                const nextBtn = document.getElementById('nextQuizBtn');
+                nextBtn.innerHTML = (quizStep < quizData.length - 1) ? "Next Question ➡️" : "See Secret Message 🤫";
+                nextBtn.style.display = "inline-block";
+            }, 600);
+        }
+
+        function nextQuiz() {
+            quizStep++;
+            if(quizStep < quizData.length) {
+                document.getElementById('quizQuestion').innerText = quizData[quizStep].q;
+                const optionsContainer = document.querySelector('.quiz-options');
+                optionsContainer.innerHTML = '';
+                
+                quizData[quizStep].options.forEach((opt, index) => {
+                    const button = document.createElement('button');
+                    button.className = 'quiz-btn';
+                    button.innerText = opt;
+                    button.onclick = function() { checkAnswer(this, index === quizData[quizStep].correct) };
+                    optionsContainer.appendChild(button);
+                });
+                
+                document.getElementById('quizFeedback').innerHTML = "";
+                document.getElementById('nextQuizBtn').style.display = "none";
+            } else {
+                nextStep(14); 
+            }
+        }
+
+        function moveButton() {
+            const btn = document.getElementById('noBtn');
+            const container = document.getElementById('mainContainer');
+            const maxX = container.clientWidth - btn.clientWidth - 40;
+            const maxY = 60; 
+            btn.style.transform = `translate(${Math.random() * maxX - maxX/2}px, ${Math.random() * maxY - maxY/2}px)`;
+            btn.innerText = ["Soch lo!", "Pakka?", "Dil todogi?", "Please!", "No way!"][Math.floor(Math.random() * 5)];
+        }
+
+        let promised = false;
+        function togglePromise() {
+            promised = !promised;
+            const box = document.querySelector('.promise-container');
+            const btn = document.getElementById('promiseBtn');
+            if (promised) {
+                box.classList.add('checked'); btn.style.opacity = '1'; btn.style.pointerEvents = 'all'; 
+                createConfetti(); showToast("Promise Locked!", "🔒");
+            } else {
+                box.classList.remove('checked'); btn.style.opacity = '0.4'; btn.style.pointerEvents = 'none';
+            }
+        }
+        
+        function toggleCheck(el) {
+            el.classList.toggle('checked');
+            if(el.classList.contains('checked')) showToast("Added to memories!", "📸");
+        }
+
+        function revealSecret(el) {
+            el.querySelector('.secret-blur').style.opacity = '0';
+            el.style.borderColor = 'var(--primary)';
+            createConfetti(); showToast("Secret Revealed!", "💌");
+        }
+
+        function handleYes() { createConfetti(); setTimeout(createConfetti, 400); nextStep(8); }
+
+        function showLetter(mood) {
+            const box = document.getElementById('letter-content');
+            box.style.display = 'block';
+            let msg = mood === 'sad' ? "Diyuu, don't be sad. Remember I am always with you. Call me! ❤️" :
+                      mood === 'happy' ? "Your smile is my favorite thing in the world. Keep smiling! ✨" :
+                      mood === 'miss' ? "I miss you too! Close your eyes, I'm right there. 🏡" :
+                      "Okay sorry! Gussa thook do. Main kaan pakadta hu. 🥺";
+            box.innerHTML = `<p>${msg}</p>`;
+        }
+
+        function sendWhatsApp() {
+            window.open(`https://wa.me/91${phoneNumber}?text=${encodeURIComponent("I Love You Too Shubham! ❤️ Forever Yours!")}`, '_blank');
+        }
+
+        function animateList(stepNumber) {
+            document.querySelectorAll('#step' + stepNumber + ' li').forEach((item, index) => { 
+                item.classList.remove('show');
+                setTimeout(() => { item.classList.add('show'); }, index * 100); 
+            });
+        }
+
+        function createConfetti() {
+            for (let i = 0; i < 40; i++) {
+                const c = document.createElement('div');
+                c.style.position = 'fixed'; c.style.left = Math.random() * 100 + 'vw'; c.style.top = '-10px';
+                c.style.width = '8px'; c.style.height = '12px'; c.style.borderRadius = '4px';
+                c.style.backgroundColor = ['#ff4d6d', '#ff8fa3', '#ffffff'][Math.floor(Math.random() * 3)];
+                c.style.zIndex = '1000'; c.style.animation = `fall ${Math.random() * 2 + 1.5}s linear forwards`;
+                document.body.appendChild(c); setTimeout(() => c.remove(), 4000);
+            }
+            if(!document.getElementById('confettiStyle')){
+                const style = document.createElement('style'); style.id = 'confettiStyle';
+                style.innerHTML = `@keyframes fall { to { transform: translateY(110vh) rotate(720deg); opacity: 0; } }`;
+                document.head.appendChild(style);
+            }
+        }
+        document.querySelectorAll('.photo').forEach(photo => {
+    photo.addEventListener('click', function() {
+        const video = this.querySelector('video');
+        const img = this.querySelector('img'); 
+        const modal = document.getElementById('mediaModal');
+        const modalVideo = document.getElementById('modalVideo');
+        const modalImage = document.getElementById('modalImage');
+        
+        // Reset display states
+        modalVideo.style.display = 'none';
+        modalImage.style.display = 'none';
+
+        if (video) {
+            modalVideo.src = video.src; 
+            modalVideo.style.display = 'block'; 
+            modal.style.display = 'flex';
+            
+            setTimeout(() => modal.classList.add('show'), 10);
+            modalVideo.play();
+        } else if (img) {
+            modalImage.src = img.src;
+            modalImage.style.display = 'block'; 
+            modal.style.display = 'flex';
+            
+            setTimeout(() => modal.classList.add('show'), 10);
+        }
+    });
+});
+
+        function closeModal(event) {
+    const modal = document.getElementById('mediaModal');
+    const modalVideo = document.getElementById('modalVideo');
+    const modalImage = document.getElementById('modalImage');
+    
+    if (event.target === modal || event.target.classList.contains('close-modal')) {
+        modal.classList.remove('show');
+        
+        setTimeout(() => {
+            modal.style.display = 'none';
+            modalVideo.pause();
+            modalVideo.src = ""; 
+            modalImage.src = ""; 
+        }, 300);
+    }
+}
+
+        function spawnAmbientParticle() {
+            const layer = document.getElementById('ambientLayer');
+            if (!layer) return;
+            const p = document.createElement('div');
+            p.className = 'ambient-particle';
+            const symbols = ['❤️', '💖', '✨', '💫', '🌸'];
+            p.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+            const size = 12 + Math.random() * 16;
+            p.style.fontSize = size + 'px';
+            p.style.left = Math.random() * 100 + 'vw';
+            const duration = 9 + Math.random() * 7;
+            p.style.setProperty('--drift', (Math.random() * 120 - 60) + 'px');
+            p.style.animationDuration = duration + 's';
+            layer.appendChild(p);
+            setTimeout(() => p.remove(), duration * 1000 + 200);
+        }
+        setInterval(spawnAmbientParticle, 900);
+        for (let i = 0; i < 6; i++) setTimeout(spawnAmbientParticle, i * 300);
+
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('button');
+            if (!btn) return;
+            const rect = btn.getBoundingClientRect();
+            const ripple = document.createElement('span');
+            const d = Math.max(rect.width, rect.height);
+            ripple.className = 'ripple';
+            ripple.style.width = ripple.style.height = d + 'px';
+            ripple.style.left = (e.clientX - rect.left - d / 2) + 'px';
+            ripple.style.top = (e.clientY - rect.top - d / 2) + 'px';
+            btn.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 700);
+        });
+
+        const tiltStack = document.querySelector('.photo-stack');
+        if (tiltStack) {
+            tiltStack.addEventListener('mousemove', (e) => {
+                const rect = tiltStack.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                tiltStack.style.transform = `rotateY(${x * 10}deg) rotateX(${-y * 10}deg)`;
+            });
+            tiltStack.addEventListener('mouseleave', () => {
+                tiltStack.style.transform = 'rotateY(0deg) rotateX(0deg)';
+            });
+        }
+       
+        window.onload = () => {
+            buildStepDots();
+            const firstText = document.querySelector('#step1 .typing-text');
+            typeWriter(firstText, firstText.getAttribute('data-text'));
+            updateProgress(1);
+            document.body.addEventListener('click', () => { if(!musicStarted) startMusicFlow(); }, { once: true });
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hide');
+            }, 1200);
+        };
+    </script>
+</body>
+</html>
